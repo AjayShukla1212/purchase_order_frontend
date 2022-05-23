@@ -1,10 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Menu from './client/components/Menu';
+
+import Navbar from './client/components/Navbar';
 
 function App() {
   return (
     <div className="App">
-      <h1>fghdfg</h1>
+    <Navbar/>
+
+    <Menu/>
     </div>
   );
 }
