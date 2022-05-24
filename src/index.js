@@ -3,21 +3,18 @@ import React from 'react';
 
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import RRoutes from './routes';
+import "antd/dist/antd.min.css";
+import Navbar from "./client/components/Navbar";
+import Demo from "./client/components/new_report";
+import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route index element={<App />} />
-      <Route path="delete" element={<Delete />} />
-      <Route path="get_all" element={<Get_all />} />
-      <Route path="new" element={<New />} />
-      <Route path="update" element={<Update />} />
-
-    </Routes>
-  </BrowserRouter>
+  <React.StrictMode>
+    <RRoutes />
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
