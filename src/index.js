@@ -6,14 +6,17 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import RRoutes from './routes';
 import "antd/dist/antd.min.css";
-import Navbar from "./client/components/Navbar";
-import Demo from "./client/components/new_report";
-import App from "./App";
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
+  <Provider store={store}>
     <RRoutes />
+    </Provider>
   </React.StrictMode>
 );
 
