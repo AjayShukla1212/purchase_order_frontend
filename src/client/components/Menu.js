@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, Space, Button } from 'antd';
 
 import { useNavigate } from 'react-router-dom';
+import { MAIN_URL } from '../../constant';
 
 
 const columns = [
@@ -73,7 +74,7 @@ const Menu = () => {
 
 
 
-      const res = await fetch('https://b70c-183-82-114-140.in.ngrok.io/api/v1/invoices', {
+      const res = await fetch(MAIN_URL, {
 
         method: "GET",
         headers: {
@@ -88,7 +89,7 @@ const Menu = () => {
       setInvoice(res)
     })
 
-
+    console.log(invoice)
 
   }, []);
   let navigate = useNavigate();
@@ -96,7 +97,7 @@ const Menu = () => {
 
 
     <div style={{ padding: "20px" }}>
-      <Button type="primary" shape='round' size='large' onClick={() => { navigate("/newreport")}}> + Add Purchase Order</Button>
+      <Button type="primary" shape='round' size='large' onClick={() => { navigate("/newreport") }}> + Add Purchase Order</Button>
       <Table columns={columns} dataSource={invoice} />
     </div>
 
