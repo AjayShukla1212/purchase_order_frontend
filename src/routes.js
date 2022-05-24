@@ -11,7 +11,7 @@ function RRoutes() {
         <BrowserRouter>
             <Routes>
                 <Route index element={<Menu />} />
-                <Route path="newreport" element={<Demo />} />
+                <Route path="/newreport" element={<Demo />} />
             </Routes>
         </BrowserRouter>
     )
@@ -19,4 +19,4 @@ function RRoutes() {
 
 }
 
-export default RRoutes
+export default RRoutes;
