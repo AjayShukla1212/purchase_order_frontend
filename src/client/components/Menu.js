@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Table, Space, Button } from 'antd';
 
-
+import { useNavigate } from 'react-router-dom';
 
 
 const columns = [
@@ -91,11 +91,12 @@ const Menu = () => {
 
 
   }, []);
+  let navigate = useNavigate();
   return (
 
 
     <div style={{ padding: "20px" }}>
-      <Button type="primary" shape='round' size='large' onClick={(e) => { e.preventDefault(); window.location.href = '/newreport'; }}> + Add Purchase Order</Button>
+      <Button type="primary" shape='round' size='large' onClick={() => { navigate("/newreport")}}> + Add Purchase Order</Button>
       <Table columns={columns} dataSource={invoice} />
     </div>
 
