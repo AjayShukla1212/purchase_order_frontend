@@ -263,11 +263,11 @@ function Demo() {
         <div className="app_category">
             <br />
             <br />
-            <h1>asda</h1>
-            {/* <div className="login-form">
+            
+            <div className="login-form">
                 {issubmitted ? <div><h2 >You have added new Purchase Order Successfully!</h2>
                 </div> : renderform}
-            </div> */}
+            </div>
 </div>
     );
 };
