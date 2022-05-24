@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
 import ErrorNotification from './client/components/error';
-import Demo from './client/components/new_report.js';
+import Demo from './client/components/new_report_form';
 
 function RRoutes() {
 
@@ -13,8 +13,7 @@ function RRoutes() {
          <Route  index element={<App/>} />
          <Route path="/newreport" element={<Demo/>} />
          <Route path='/error' element={<ErrorNotification/>} />
-         
-        </Routes>
+         </Routes>
         </BrowserRouter>
     )
 

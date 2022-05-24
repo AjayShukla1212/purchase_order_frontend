@@ -8,9 +8,7 @@ import RRoutes from './routes';
 import "antd/dist/antd.min.css";
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import Navbar from "./client/components/Navbar";
-import Demo from "./client/components/new_report";
-import App from "./App";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
