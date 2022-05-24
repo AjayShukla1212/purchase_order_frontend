@@ -1,14 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-
-import ErrorNotification from './client/components/error';
-import { Button, Modal } from 'antd';
+import Menu from './client/components/Menu';
 import Navbar from './client/components/Navbar';
 import { actionCreators } from '../src/redux/index';
 
 
+
+//import Demo from './client/components/new_report';
 
 function App() {
  const dispatch = useDispatch();
@@ -23,16 +23,12 @@ const genErr=()=>{
 }
   return (
     <div className="App">
-    
-    <h1>Front page</h1>
-    
-    {/* <ErrorNotification /> */}
-    <form>
+ <Navbar />
+ <Menu />
+      <form>
       <label>Gen error</label>
       <button type="submit" onClick={genErr}>Submit</button>
     </form>
-    {/* <Navbar/> */}
-    
     </div>
   );
 }

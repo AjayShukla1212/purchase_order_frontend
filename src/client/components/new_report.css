@@ -1,0 +1,83 @@
+.app {
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    height: 100vh;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    background-color: #def50e;
+}
+
+.app_category {
+    /* background-image: url('https://image.shutterstock.com/image-vector/vector-illustration-background-social-media-260nw-1101609377.jpg'); */
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* gap: 20px;
+    height: 90vh; */
+
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    background-position: center;
+    margin: auto;
+
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.button-contain {
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    background: #0c090b;
+    border: 1px solid #01d28e;
+    color: #fff;
+    padding: 10px 20px;
+    align-items: center;
+    margin: auto;
+    text-align: center;
+}
+
+.button-contain:hover {
+
+    background-color: aliceblue;
+    color: rgb(253, 251, 251);
+    border: 2px solid greenyellow;
+}
+
+.login-form {
+    background-color: rgba(133, 212, 236, 0.7);
+    padding: 40px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    flex: 0;
+    width: 75%;
+    align-items: center;
+    margin: auto;
+}
+
+.list-container {
+    display: flex;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.title {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+}

@@ -1,18 +1,21 @@
+
 import React from 'react';
-import {BrowserRouter ,Route,Routes} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
 import ErrorNotification from './client/components/error';
+import Demo from './client/components/new_report';
 
-const RRoutes=()=>{
+function RRoutes() {
 
-    return(
+    return (
         <BrowserRouter>
          <Routes>
-         <Route  path='/' element={<App/>} />
+         <Route  index element={<App/>} />
          <Route path='/error' element={<ErrorNotification/>} />
+         <Route path="/newreport" element={<Demo/>} />
         </Routes>
         </BrowserRouter>
-       )
+    )
 
 
 }
