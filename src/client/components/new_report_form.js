@@ -1,3 +1,4 @@
+import React from 'react'
 import { DatePicker } from 'antd';
 import { InputNumber } from 'antd';
 import { Select, Form, Input, Button } from 'antd';
@@ -5,6 +6,7 @@ import { useState } from 'react';
 import './new_report.css';
 const { Option } = Select;
 function Demo() {
+    debugger;
     const [po_number, setpo_number] = useState(0)
     const [company_name, setcompany_name] = useState('')
     const [po_date, setpo_date] = useState('')
@@ -262,12 +264,12 @@ function Demo() {
         <div className="app_category">
             <br />
             <br />
+            
             <div className="login-form">
                 {issubmitted ? <div><h2 >You have added new Purchase Order Successfully!</h2>
                 </div> : renderform}
             </div>
-
-        </div >
+</div>
     );
 };
 
