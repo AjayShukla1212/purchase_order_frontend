@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Table, Tag, Space, Button } from 'antd';
+import { Table, Space, Button } from 'antd';
 
 
 
@@ -55,49 +55,6 @@ const columns = [
   },
 ];
 
-// const data = [
-//   {
-//     key: '1',
-//     po:'122312',
-//     name: 'John Brown',
-//     po_date: '12-04-2022',
-//     vendor: "Zaggle",
-//     shippingMethod: "Cash",
-//     paymentTerms: "Lorem Epsum",
-//     requiredDate: "12.05.2022",
-//     itemDescription: "Something1",
-//     quantity: "2",
-//     itemAmount: "2134",
-//   },
-//   {
-//     key: '2',
-//     po:'122982',
-//     name: 'Jim Green',
-//     po_date: '12-10-2022',
-//     vendor: "Zaggle",
-//     shippingMethod: "UPI",
-//     paymentTerms: "Lorem Epsum",
-//     requiredDate: "02.05.2022",
-//     itemDescription: "Something2",
-//     quantity: "6",
-//     itemAmount: "4124"
-
-//   },
-//   {
-//     key: '3',
-//     po:'122365',
-//     name: 'Joe Black',
-//     po_date: '21-03-2022',
-//     vendor: "Zaggle",
-//     shippingMethod: "Card",
-//     paymentTerms: "Lorem Epsum",
-//     requiredDate: "07.05.2022",
-//     itemDescription: "Something3",
-//     quantity: "4",
-//     itemAmount: "9876"
-
-//   },
-// ];
 
 
 const Menu = () => {
