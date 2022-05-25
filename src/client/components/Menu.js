@@ -98,6 +98,7 @@ const Menu = () => {
 
     <div style={{ padding: "20px" }}>
       <Button type="primary" shape='round' size='large' onClick={() => { navigate("/newreport") }}> + Add Purchase Order</Button>
+      <Button type="primary" shape='round' size='large' onClick={() => { navigate("/upload") }}> + Upload</Button>
       <Table columns={columns} dataSource={invoice} />
     </div>
 

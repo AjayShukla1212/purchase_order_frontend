@@ -5,6 +5,7 @@ import { Select, Form, Input, Button } from 'antd';
 import { useState } from 'react';
 import './new_report.css';
 import { MAIN_URL } from '../../constant';
+import Upload_page from './main_form';
 const { Option } = Select;
 
 function Demo() {
@@ -44,14 +45,14 @@ function Demo() {
     const onFinish = (values) => {
         const student = { po_number, company_name, po_date, vendor_name, shipping_method, payment_terms, required_date, item_description, quantity, item_amount }
         //console.log(student);
-        //setIsSubmitted(true);
+        setIsSubmitted(true);
         fetch(MAIN_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(student)
 
         }).then(() => {
-            setIsSubmitted(true);
+            //setIsSubmitted(true);
             console.log("done");
         })
     }
@@ -265,14 +266,22 @@ function Demo() {
         <div className="app_category">
             <br />
             <br />
-
-            <div className="login-form">
-                {issubmitted ? <div><h2 >You have added new Purchase Order Successfully!</h2>
-                    <Button className="button-contain" variant="contained" type="primary" shape='round' size='large' onClick={(e) => { e.preventDefault(); window.location.href = '/newreport'; }}>
-                        + Add New Report
-                    </Button>
-                </div> : renderform}
-            </div>
+            <table>
+                <tr>
+                    <td style={{ width: '35%', height: '9em' }}>
+                        <Upload_page style={{ position: 'relative' }} />
+                    </td>
+                    <td>
+                        <div className="login-form">
+                            {issubmitted ? <div><h2 >You have added new Purchase Order Successfully!</h2>
+                                <Button className="button-contain" variant="contained" type="primary" shape='round' size='large' onClick={(e) => { e.preventDefault(); window.location.href = '/newreport'; }}>
+                                    + Add New Report
+                                </Button>
+                            </div> : renderform}
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     );
 };
