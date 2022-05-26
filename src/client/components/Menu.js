@@ -7,11 +7,18 @@ import { useNavigate } from 'react-router-dom';
 
 const columns = [
   {
+    title: 'Id',
+    dataIndex:'id',
+    key: 'id',
+    render: text => <a href={"https://783a-183-82-114-140.in.ngrok.io/api/v1/invoices/" + text}>{text}</a>
+  },
+  
+  {
     title: 'Purchase Order',
     dataIndex:'po_number',
     key: 'po_number',
-    render: text => <a href='/newreport'>{text}</a>
-  },
+  //   render: text => <a href={`https://783a-183-82-114-140.in.ngrok.io/api/v1/invoices/`}>{text}</a>
+   },
   {
     title: 'Company Name',
     dataIndex: 'company_name',
@@ -105,7 +112,7 @@ const Menu = () =>{
 
        
 
-            const res = await fetch('https://b70c-183-82-114-140.in.ngrok.io/api/v1/invoices',{
+            const res = await fetch('https://783a-183-82-114-140.in.ngrok.io/api/v1/invoices',{
 
                 method: "GET",
                 headers: {
@@ -132,6 +139,9 @@ const Menu = () =>{
     <div style={{ padding: "20px" }}>
       <Button type="primary" shape='round' size='large' onClick={() => { navigate("/newreport")}}> + Add Purchase Order</Button>
       <Table columns={columns} dataSource={invoice} />
+      {/* {
+        invoice.map(temp => (<h1>{temp.id}</h1>) )
+      } */}
     </div>
     
 

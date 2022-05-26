@@ -9,18 +9,11 @@ function RRoutes() {
 
     return (
         <BrowserRouter>
-<<<<<<< HEAD
-            <Routes>
-                <Route index element={<Menu />} />
-                <Route path="/newreport" element={<Demo />} />
-            </Routes>
-=======
          <Routes>
          <Route  index element={<App/>} />
          <Route path="/newreport" element={<Demo/>} />
          <Route path='/error' element={<ErrorNotification/>} />
          </Routes>
->>>>>>> 5f02fc4015c2ddeaeef509a6fc182dd8154bda94
         </BrowserRouter>
     )
 
