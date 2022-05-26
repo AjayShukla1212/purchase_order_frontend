@@ -6,6 +6,7 @@ import { useState } from 'react';
 import './new_report.css';
 import { MAIN_URL } from '../../constant';
 import Upload_page from './main_form';
+import ShowDetails from '../view_details';
 const { Option } = Select;
 
 function Demo() {
@@ -46,7 +47,7 @@ function Demo() {
         const student = { po_number, company_name, po_date, vendor_name, shipping_method, payment_terms, required_date, item_description, quantity, item_amount }
         //console.log(student);
         setIsSubmitted(true);
-        fetch(MAIN_URL, {
+        fetch('http://localhost:8080/report', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(student)
@@ -62,7 +63,7 @@ function Demo() {
 
     const renderform = (
         <div className='form'>
-
+            <ShowDetails />
             <Form
                 name="basic"
                 labelCol={{
