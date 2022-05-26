@@ -1,0 +1,1 @@
+export const MAIN_URL = 'https://783a-183-82-114-140.in.ngrok.io/api/v1/invoices'

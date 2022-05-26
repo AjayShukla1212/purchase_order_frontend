@@ -1,8 +1,9 @@
 import React,{useState, useEffect} from 'react';
 
-import { Table, Tag, Space, Button } from 'antd';
+import { Table, Space, Button } from 'antd';
 
 import { useNavigate } from 'react-router-dom';
+import { MAIN_URL } from '../../constant';
 
 
 const columns = [
@@ -64,36 +65,6 @@ const columns = [
   },
 ];
 
-// const data = [
-//   {
-//     key: '1',
-//     po_number:'122312',
-//     name: 'John Brown',
-//     po_date: '12-04-2022',
-//     vendor_name: "Zaggle",
-//     shippingMethod: "Cash",
-//     paymentTerms: "Lorem Epsum",
-//     requiredDate: "12.05.2022",
-//     itemDescription: "Something1",
-//     quantity: "2",
-//     itemAmount: "2134",
-//   },
-//   {
-//     key: '2',
-//     po_number:'122982',
-//     name: 'Jim Green',
-//     po_date: '12-10-2022',
-//     vendor_name: "Zaggle",
-//     shippingMethod: "UPI",
-//     paymentTerms: "Lorem Epsum",
-//     requiredDate: "02.05.2022",
-//     itemDescription: "Something2",
-//     quantity: "6",
-//     itemAmount: "4124"
-    
-//   },
-  
-// ];
 
 
 const Menu = () =>{
@@ -114,11 +85,7 @@ const Menu = () =>{
 
             const res = await fetch('https://783a-183-82-114-140.in.ngrok.io/api/v1/invoices',{
 
-                method: "GET",
-                headers: {
-                  "Accept": "application/json",
-              }
-              })
+      const res = await fetch(MAIN_URL, {
 
              return await res.json();
         }
@@ -128,7 +95,7 @@ const Menu = () =>{
 
    
 
-
+    console.log(invoice)
 
   }, []);
   let navigate = useNavigate();
@@ -137,7 +104,8 @@ const Menu = () =>{
 
 
     <div style={{ padding: "20px" }}>
-      <Button type="primary" shape='round' size='large' onClick={() => { navigate("/newreport")}}> + Add Purchase Order</Button>
+      <Button type="primary" shape='round' size='large' onClick={() => { navigate("/newreport") }}> + Add Purchase Order</Button>
+      <Button type="primary" shape='round' size='large' onClick={() => { navigate("/upload") }}> + Upload</Button>
       <Table columns={columns} dataSource={invoice} />
       {/* {
         invoice.map(temp => (<h1>{temp.id}</h1>) )
