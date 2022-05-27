@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import { Table, Tag, Space, Button } from 'antd';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+
+import axios from "axios";
+
 
 
 const columns = [
@@ -47,9 +50,8 @@ const columns = [
       <Space size="middle">
         {/* <a>Invite {record.name}</a>
         <a>Delete</a> */}
-        <Button name="update" type="primary" shape="round" size='large'>Update</Button>
+        <Link to={{pathname: `/update/${record.id}`}}><Button name="update" type="primary" shape="round" size='large'>Update</Button></Link>
         <Button name="delete" type="danger" shape="round" size='large'>Delete</Button>
-
       </Space>
     ),
   },
@@ -58,7 +60,7 @@ const columns = [
 // const data = [
 //   {
 //     key: '1',
-//     po:'122312',
+//     po_number:'122312',
 //     name: 'John Brown',
 //     po_date: '12-04-2022',
 //     vendor: "Zaggle",
@@ -85,7 +87,7 @@ const columns = [
 //   },
 //   {
 //     key: '3',
-//     po:'122365',
+//     po_number:'122365',
 //     name: 'Joe Black',
 //     po_date: '21-03-2022',
 //     vendor: "Zaggle",
@@ -116,7 +118,7 @@ const Menu = () => {
 
 
 
-      const res = await fetch('https://b70c-183-82-114-140.in.ngrok.io/api/v1/invoices', {
+      const res = await fetch('http://localhost:8080/getreport', {
 
         method: "GET",
         headers: {
@@ -135,6 +137,7 @@ const Menu = () => {
 
   }, []);
   let navigate = useNavigate();
+
   return (
 
 
