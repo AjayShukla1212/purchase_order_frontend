@@ -49,7 +49,7 @@ function ShowDetails() {
 
                 <div className='input-container'>
                     <Form.Item
-                        label="Vendor Name"
+                        label="Vendor Name : "
                         name="Shipping_method"
                         rules={[
                             {

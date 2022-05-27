@@ -1,7 +1,7 @@
 import React from 'react'
 import { DatePicker } from 'antd';
 import { InputNumber } from 'antd';
-import { Select, Form, Input, Button } from 'antd';
+import { Select, Form, Input, Button, Modal } from 'antd';
 import { useState } from 'react';
 import './new_report.css';
 import { MAIN_URL } from '../../constant';
@@ -21,7 +21,7 @@ function Demo() {
     const [item_description, setitem_discription] = useState('')
     const [quantity, setquantity] = useState(0)
     const [item_amount, setitem_amount] = useState(0)
-    const [issubmitted, setIsSubmitted] = useState(false);
+    const [issubmitted, setIsSubmitted] = useState(true);
     const handle_po_Date = (date, dateString) => {
         setpo_date(dateString);
 
@@ -45,22 +45,26 @@ function Demo() {
     }
     const onFinish = (values) => {
         const student = { po_number, company_name, po_date, vendor_name, shipping_method, payment_terms, required_date, item_description, quantity, item_amount }
-        //console.log(student);
-        setIsSubmitted(true);
+        //setIsSubmitted(true);
+        // success();
         fetch('http://localhost:8080/report', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(student)
 
         }).then(() => {
-            //setIsSubmitted(true);
             console.log("done");
+            success();
         })
     }
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-
+    const success = () => {
+        Modal.success({
+            content: 'Purchase Order Added Successfully!',
+        });
+    };
     const renderform = (
         <div className='form'>
             <ShowDetails />
@@ -274,11 +278,7 @@ function Demo() {
                     </td>
                     <td>
                         <div className="login-form">
-                            {issubmitted ? <div><h2 >You have added new Purchase Order Successfully!</h2>
-                                <Button className="button-contain" variant="contained" type="primary" shape='round' size='large' onClick={(e) => { e.preventDefault(); window.location.href = '/newreport'; }}>
-                                    + Add New Report
-                                </Button>
-                            </div> : renderform}
+                            {issubmitted ? renderform : <h1></h1>}
                         </div>
                     </td>
                 </tr>

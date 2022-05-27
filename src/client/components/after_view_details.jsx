@@ -1,104 +1,100 @@
 import React from 'react';
-
 // import './MiniDesc.css';
-
-
-
-import { Descriptions } from 'antd';
-
 const MiniDesc = (props) => {
     return (
         <div className='tabledesc'>
 
             <table>
+                <td>
+                    <tr>
 
-                <tr>
+                        <th>Vendor Id:- </th>
 
-                    <th>Vendor Id</th>
+                        <td>{props.report.id}</td>
 
-                    <td>{props.report.id}</td>
+                    </tr>
 
-                </tr>
+                    <tr>
 
-                <tr>
+                        <th>PO number:- </th>
 
-                    <th>PO number</th>
+                        <td>{props.report.po_number}</td>
 
-                    <td>{props.report.po_number}</td>
+                    </tr>
 
-                </tr>
+                    <tr>
 
-                <tr>
+                        <th>Company Name:- </th>
 
-                    <th>Company Name</th>
+                        <td>{props.report.company_name}</td>
 
-                    <td>{props.report.company_name}</td>
-
-                </tr>
+                    </tr>
 
 
-                <tr>
+                    <tr>
 
-                    <th>PO Date</th>
+                        <th>PO Date:- </th>
 
-                    <td>{props.report.po_date}</td>
+                        <td>{props.report.po_date}</td>
 
-                </tr>
+                    </tr>
 
-                <tr>
+                    <tr>
 
-                    <th>Vendor Name</th>
+                        <th>Vendor Name:- </th>
 
-                    <td>{props.report.vendor_name}</td>
+                        <td>{props.report.vendor_name}</td>
 
-                </tr>
+                    </tr>
 
-                <tr>
+                    <tr>
 
-                    <th>Shipping Method</th>
+                        <th>Shipping Method:- </th>
 
-                    <td>{props.report.shipping_method}</td>
+                        <td>{props.report.shipping_method}</td>
 
-                </tr>
+                    </tr>
+                </td>
+                <td>
+                    <tr>
 
-                <tr>
+                        <th>Payment Term:- </th>
 
-                    <th>Payment Term</th>
+                        <td>{props.report.payment_terms}</td>
 
-                    <td>{props.report.payment_terms}</td>
+                    </tr>
 
-                </tr>
+                    <tr>
 
-                <tr>
+                        <th>Required Date:- </th>
 
-                    <th>Required Date</th>
+                        <td>{props.report.required_date}</td>
 
-                    <td>{props.report.required_date}</td>
+                    </tr>
 
-                </tr>
+                    <tr>
 
-                <tr>
+                        <th>Description:- </th>
 
-                    <th>Description</th>
+                        <td>{props.report.item_description}</td>
 
-                    <td>{props.report.item_description}</td>
+                    </tr>
+                    <tr>
 
-                </tr>
-                <tr>
+                        <th>Quantity:- </th>
 
-                    <th>Quantity</th>
+                        <td>{props.report.quantity}</td>
 
-                    <td>{props.report.quantity}</td>
+                    </tr>
 
-                </tr>
+                    <tr>
 
-                <tr>
+                        <th>Item Amount:- </th>
 
-                    <th>Item Amount</th>
+                        <td>{props.report.item_amount}</td>
 
-                    <td>{props.report.item_amount}</td>
-
-                </tr>
+                    </tr>
+                </td>
             </table>
 
         </div>
