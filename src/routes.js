@@ -5,7 +5,9 @@ import App from './App';
 import ErrorNotification from './client/components/error';
 import Demo from './client/components/new_report_form';
 import Upload_page from './client/components/main_form';
-import MiniDesc from './client/components/MiniDesc';
+import ShowDetails from './client/view_details';
+import MiniDesc from './client/components/after_view_details';
+import ViewPo from './client/components/ViewPoNumber';
 function RRoutes() {
 
     return (
@@ -15,7 +17,8 @@ function RRoutes() {
                 <Route path="/newreport" element={<Demo />} />
                 <Route path='/error' element={<ErrorNotification />} />
                 <Route path='/upload' element={<Upload_page />} />
-                <Route path='/mini_desc' element = {<MiniDesc name="Subhadip" email="email@example.com" address="dsd sddn ld wenl sS"/>} />
+                <Route path='/getdetails' element={<ShowDetails />} />
+                <Route path='/view' element={<ViewPo />} />
             </Routes>
         </BrowserRouter>
     )

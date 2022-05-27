@@ -4,24 +4,60 @@ import { Table, Space, Button } from 'antd';
 
 import { useNavigate } from 'react-router-dom';
 import { MAIN_URL } from '../../constant';
+import ViewPo from './ViewPoNumber';
 
+const getId = async(val)=>{
+  await fetch(`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${val}`)
+  .then(temp =>temp.data.json())
+  .then(result=>{
+    console.log(result);
+    return <ViewPo report = {result}/>
+  })
+}
+
+
+ const handleClick = (e) => {
+    e.preventDefault();
+    console.log('The link was clicked.');
+  //   await fetch(`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${val}`)
+  // .then(temp =>temp.data.json())
+  // .then(result=>{
+  //   console.log(result);
+  //   return <ViewPo report = {result}/>
+  // })
+  };
 
 const columns = [
-  {
-    title: 'Id',
-    dataIndex:'id',
-    key: 'id',
-    render: text => <a href={"https://783a-183-82-114-140.in.ngrok.io/api/v1/invoices/" + text}>{text}</a>
-  },
+  // {
+  //   title: 'Id',
+  //   dataIndex:'id',
+  //   key: 'id',
+  //   render: text => <a  onClick={handleClick} >{text}</a>
+  //   // href={`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${text}`}
+  // },
+
+  // {
+  //   title: 'Id',
+  //   key: 'id',
+  //   render: (text, record) => (
+  //     <Space size="middle">
+  //       <a  href={`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${record.id}`}>{text}</a>
+  //       {/* <Button name="update" type="primary" shape="round" size='large'>Update</Button>
+  //       <Button name="delete" type="danger" shape="round" size='large'>Delete</Button> */}
+        
+
+  //     </Space>
+  //   ),
+  // },
   
   {
-    title: 'Purchase Order',
+    title: 'PO Number',
     dataIndex:'po_number',
     key: 'po_number',
-  //   render: text => <a href={`https://783a-183-82-114-140.in.ngrok.io/api/v1/invoices/`}>{text}</a>
+     render: (text,record) => <a onClick={handleClick} href={`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${record.id}`}>{text}</a>
    },
   {
-    title: 'Company Name',
+    title: 'Owner Name',
     dataIndex: 'company_name',
     key: 'company_name',
     // render: text => <a>{text}</a>,
@@ -33,55 +69,47 @@ const columns = [
   },
 
   {
-    title: 'Shipping Method',
-    dataIndex: 'shipping_method',
-    key: 'shipping_method',
+    title: 'Date',
+    dataIndex: 'date',
+    key: 'date',
   },
 
   {
-    title: 'Quantity',
-    dataIndex: 'quantity',
-    key: 'quantity',
+    title: 'Expected Delivery',
+    dataIndex: 'delivery_date',
+    key: 'delivery_date',
   },
 
   {
-    title: 'Item Amount',
-    dataIndex: 'item_amount',
-    key: 'item_amount',
+    title: 'Amount',
+    dataIndex: 'total_amount',
+    key: 'total_amount',
   },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (text, record) => (
-      <Space size="middle">
-        {/* <a>Invite {record.name}</a>
-        <a>Delete</a> */}
-        <Button name="update" type="primary" shape="round" size='large'>Update</Button>
-        <Button name="delete" type="danger" shape="round" size='large'>Delete</Button>
-        
 
-      </Space>
-    ),
-  },
+  
 ];
 
 
 
 const Menu = () => {
    const [invoice,setInvoice] = useState([]);
-  // useEffect(() =>{
-  //   fetch("https://b70c-183-82-114-140.in.ngrok.io/api/v1/invoices")
-  //     .then(res => res.json())
-  //     .then((result)=>{
-  //       setInvoice(result);
-  //     }).then(console.log(invoice))
-  // },[])
+
+  
+  useEffect(() =>{
+    fetch("https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders")
+      .then(res => res.json())
+      .then((result)=>{
+        setInvoice(result);
+      }).then(console.log(invoice))
+  },[])
 
   useEffect(() => {
 
     async function fetchData() {
 
-      const res = await fetch(MAIN_URL, {
+
+
+      const res = await fetch('http://localhost:8080/getreport', {
 
         method: "GET",
         headers: {
@@ -107,7 +135,8 @@ const Menu = () => {
 
     <div style={{ padding: "20px" }}>
       <Button type="primary" shape='round' size='large' onClick={() => { navigate("/newreport") }}> + Add Purchase Order</Button>
-      <Button type="primary" shape='round' size='large' onClick={() => { navigate("/upload") }}> + Upload</Button>
+      {/* <Button type="primary" shape='round' size='large' onClick={() => { navigate("/upload") }}> + Upload</Button>
+      <Button type="primary" shape='round' size='large' onClick={() => { navigate("/getdetails") }}> + GetDetails</Button> */}
       <Table columns={columns} dataSource={invoice} />
       {/* {
         invoice.map(temp => (<h1>{temp.id}</h1>) )
