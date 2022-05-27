@@ -16,7 +16,7 @@ const MiniDesc = (props) => {
 
                     <th>Vendor Id</th>
 
-                    <td>{props.report.id}</td>
+                    <td>{props.report.name}</td>
 
                 </tr>
 
@@ -24,7 +24,7 @@ const MiniDesc = (props) => {
 
                     <th>PO number</th>
 
-                    <td>{props.report.po_number}</td>
+                    <td>{props.report.email}</td>
 
                 </tr>
 
@@ -32,11 +32,11 @@ const MiniDesc = (props) => {
 
                     <th>Company Name</th>
 
-                    <td>{props.report.company_name}</td>
+                    <td>{props.report.address}</td>
 
                 </tr>
 
-
+{/* 
                 <tr>
 
                     <th>PO Date</th>
@@ -98,7 +98,7 @@ const MiniDesc = (props) => {
 
                     <td>{props.report.item_amount}</td>
 
-                </tr>
+                </tr> */}
             </table>
 
         </div>
