@@ -1,0 +1,19 @@
+/* Descriptions{
+    position: relative;
+} */
+
+table{
+    position: relative;
+    left:3em;
+    top: 3em;
+    border: 1px solid black;
+}
+
+th{
+    padding: 5px;
+    text-align: left;
+}
+td{
+    padding: 5px;
+    text-align: left;
+}
