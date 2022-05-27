@@ -12,26 +12,30 @@ const MiniDesc = (props) => {
 
                         <td>{props.report.id}</td>
 
+                        <td>{props.report.name}</td>
+
+                        <tr>
+
+                            <th>PO number:- </th>
+
+                            <td>{props.report.po_number}</td>
+
+                            <td>{props.report.email}</td>
+
+                            <tr>
+
+                                <th>Company Name:- </th>
+
+                                <td>{props.report.company_name}</td>
+
+                                <td>{props.report.address}</td>
+
+                            </tr>
+                        </tr>
                     </tr>
 
-                    <tr>
-
-                        <th>PO number:- </th>
-
-                        <td>{props.report.po_number}</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <th>Company Name:- </th>
-
-                        <td>{props.report.company_name}</td>
-
-                    </tr>
-
-
-                    <tr>
+                    {/* 
+                <tr>
 
                         <th>PO Date:- </th>
 
@@ -93,13 +97,15 @@ const MiniDesc = (props) => {
 
                         <td>{props.report.item_amount}</td>
 
-                    </tr>
+                    <td>{props.report.item_amount}</td>
+
+                </tr> */}
                 </td>
             </table>
 
         </div>
 
-    )
+    );
 
 }
 
