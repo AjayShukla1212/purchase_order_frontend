@@ -63,19 +63,20 @@ function fun(){
                       
                         
                     >
-                        <Select placeholder='select vendor name'  >
+                        <Select placeholder='select vendor name' onChange={fun} >
                            
-                                <Option onClick={fun}>{report_id.name}</Option>
+                                <Option>{report_id.name}</Option>
                            
                         </Select>
                     </Form.Item>
 
                 </div>
+                {isSelect ?<Form.Item className='input-container'><MiniDesc report={report_id} /> </Form.Item> : <h1></h1>}
             </Form>
         </div>
-        {isSelect ? <MiniDesc report={report_id} /> : <h1></h1>
+        
 
-        }
+        
     </div>
     );
 }
