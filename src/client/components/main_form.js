@@ -1,6 +1,8 @@
 import { InboxOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
+import { PickerOverlay } from 'filestack-react';
 const { Dragger } = Upload;
+
 const props = {
     name: 'file',
     multiple: true,
@@ -26,16 +28,21 @@ const props = {
 };
 
 const Upload_page = () => (
-    <Dragger {...props}>
-        <p className="ant-upload-drag-icon">
-            <InboxOutlined />
-        </p>
-        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-        <p className="ant-upload-hint">
-            Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-            band files
-        </p>
-    </Dragger>
+    // <Dragger {...props}>
+    //     <p className="ant-upload-drag-icon">
+    //         <InboxOutlined />
+    //     </p>
+    //     <p className="ant-upload-text">Click or drag file to this area to upload</p>
+    //     <p className="ant-upload-hint">
+    //         Support for a single or bulk upload. Strictly prohibit from uploading company data or other
+    //         band files
+    //     </p>
+    // </Dragger>
+    <PickerOverlay
+  apikey={'Av8CcCYvOQJqbe1GXUxJkz'}
+  onSuccess={(res) => console.log(res)}
+  onUploadDone={(res) => console.log(res)}
+/>
 );
 
 export default Upload_page;
