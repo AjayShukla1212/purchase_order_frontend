@@ -10,14 +10,15 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 
 
-const root = document.getElementById('root');
 
+const root = document.getElementById('root');
 render(
   <React.StrictMode>
-  <Provider store={store}>
-    <RRoutes />
+    <Provider store={store}>
+      <RRoutes />
     </Provider>
-  </React.StrictMode>,root
+  </React.StrictMode>,
+  root
 );
 
 // render(<RRoutes />, root);

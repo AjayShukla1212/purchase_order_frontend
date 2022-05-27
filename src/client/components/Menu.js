@@ -74,7 +74,7 @@ const Menu = () => {
 
 
 
-      const res = await fetch(MAIN_URL, {
+      const res = await fetch('http://localhost:8080/getreport', {
 
         method: "GET",
         headers: {
@@ -98,7 +98,8 @@ const Menu = () => {
 
     <div style={{ padding: "20px" }}>
       <Button type="primary" shape='round' size='large' onClick={() => { navigate("/newreport") }}> + Add Purchase Order</Button>
-      <Button type="primary" shape='round' size='large' onClick={() => { navigate("/upload") }}> + Upload</Button>
+      {/* <Button type="primary" shape='round' size='large' onClick={() => { navigate("/upload") }}> + Upload</Button>
+      <Button type="primary" shape='round' size='large' onClick={() => { navigate("/getdetails") }}> + GetDetails</Button> */}
       <Table columns={columns} dataSource={invoice} />
     </div>
 
