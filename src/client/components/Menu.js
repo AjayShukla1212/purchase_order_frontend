@@ -67,7 +67,7 @@ const columns = [
 
 
 
-const Menu = () =>{
+const Menu = () => {
    const [invoice,setInvoice] = useState([]);
   // useEffect(() =>{
   //   fetch("https://b70c-183-82-114-140.in.ngrok.io/api/v1/invoices")
@@ -77,15 +77,17 @@ const Menu = () =>{
   //     }).then(console.log(invoice))
   // },[])
 
-  useEffect( () => {
+  useEffect(() => {
 
     async function fetchData() {
 
-       
-
-            const res = await fetch('https://783a-183-82-114-140.in.ngrok.io/api/v1/invoices',{
-
       const res = await fetch(MAIN_URL, {
+
+        method: "GET",
+        headers: {
+          "Accept": "application/json",
+        }
+      })
 
              return await res.json();
         }
