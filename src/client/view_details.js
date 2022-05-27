@@ -7,26 +7,36 @@ function ShowDetails() {
     const [report, setreport] = useState([]);
     const [report_id, setreport_id] = useState({});
     const [isSelect, setSelect] = useState(false);
-    const setforgetdetails = async (value) => {
-        await fetch(`http://localhost:8080/getreport/${value}`)
-            .then(res => res.json())
+    const setforgetdetails = async () => {
+        await fetch(`https://run.mocky.io/v3/bbc715a0-2f96-4559-8025-8b3b8e0f828b`)
+            .then(res => console.log(res))
             .then((result) => {
+                console.log(result);
                 setreport_id(result);
                 setSelect(true)
             }
             )
     }
     useEffect(() => {
-        fetch("http://localhost:8080/getreport")
+        // fetch("http://localhost:8080/getreport")
+        //     .then(res => res.json())
+        //     .then((result) => {
+        //         setreport(result);
+        //     }
+        //     )
+        fetch(`https://run.mocky.io/v3/bbc715a0-2f96-4559-8025-8b3b8e0f828b`)
             .then(res => res.json())
             .then((result) => {
-                setreport(result);
+                console.log(result);
+                 setreport_id(result);
+                
             }
             )
-        console.log(report_id);
-    }, [report_id, isSelect])
-
-
+        console.log(isSelect)
+    }, [isSelect])
+function fun(){
+    setSelect(!isSelect);
+}
     return (<div>
         <div>
 
@@ -50,19 +60,13 @@ function ShowDetails() {
                 <div className='input-container'>
                     <Form.Item
                         label="Vendor Name"
-                        name="Shipping_method"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input Shipping method!',
-                            },
-                        ]}
+                      
+                        
                     >
-                        <Select placeholder='select vendor name' onChange={setforgetdetails} >
-                            {report.map(student => (
-                                <Option value={student.id}>{student.vendor_name}</Option>
-                            ))
-                            }
+                        <Select placeholder='select vendor name'  >
+                           
+                                <Option onClick={fun}>{report_id.name}</Option>
+                           
                         </Select>
                     </Form.Item>
 
