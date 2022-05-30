@@ -10,6 +10,7 @@ const { Option } = Select;
 function Update() {
     let navigate = useNavigate();
 const {id} = useParams();
+console.log(id)
 const [invoice, setInvoice] = useState({
     company_name: "",
     vendor_name: "",
@@ -27,9 +28,10 @@ const onInputChange = e => {
 };
 
 const loadInvoice = async () => {
-    const result = await axios.get(`http://localhost:8080/getreport/${id}`);
+    const result = await axios.get(`https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${id}`);
     let data= await result.data;
-    setInvoice(data);
+    setInvoice(data.data);
+    console.log(data.data);
 };
 
 useEffect(() => {

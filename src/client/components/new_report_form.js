@@ -14,11 +14,11 @@ function Demo() {
     debugger;
     const [po_number, setpo_number] = useState(0)
     const [company_name, setcompany_name] = useState('')
-    const [po_date, setpo_date] = useState('')
+    const [date, setpo_date] = useState('')
     const [vendor_name, setvendor_name] = useState('')
     const [descrption,setDescription] = useState('')
     const [payment_terms, setpayment_term] = useState('')
-    const [required_date, setrequired_date] = useState('')
+    const [delivery_date, setrequired_date] = useState('')
     const [item_amount, setitem_amount] = useState(0)
     const [total_amount,setTotal]=useState(0)
     const [cgst, setCgst] = useState(0)
@@ -43,10 +43,10 @@ function Demo() {
         setitem_amount(value);
     }
     const onFinish = (values) => {
-        const student = { po_number, company_name, po_date, vendor_name, payment_terms, required_date, item_amount }
+        const student = { po_number, delivery_date, date,item_amount,cgst,sgst,igst,tds,descrption};
         //console.log(student);
         setIsSubmitted(true);
-        fetch('http://localhost:8080/report', {
+        fetch('https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(student)

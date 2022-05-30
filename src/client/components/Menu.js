@@ -111,7 +111,7 @@ const Menu = () => {
 
   
   useEffect(() =>{
-    fetch("https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders")
+    fetch("https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders")
       .then(res => res.json())
       .then((result)=>{
         setInvoice(result);
