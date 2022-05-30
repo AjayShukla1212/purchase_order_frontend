@@ -3,7 +3,9 @@ import React,{useState, useEffect} from 'react';
 import { Table, Space, Button } from 'antd';
 
 
+
 import { Link, useNavigate } from 'react-router-dom';
+
 import { MAIN_URL } from '../../constant';
 import ViewPo from './ViewPoNumber';
 
@@ -70,9 +72,21 @@ const columns = [
   },
 
   {
-    title: 'Amount',
-    dataIndex: 'total_amount',
-    key: 'total_amount',
+    title: 'Item Amount',
+    dataIndex: 'item_amount',
+    key: 'item_amount',
+  },
+  {
+    title: 'Action',
+    key: 'action',
+    render: (text, record) => (
+      <Space size="middle">
+        {/* <a>Invite {record.name}</a>
+        <a>Delete</a> */}
+        <Link to={{pathname: `/update/${record.id}`}}><Button name="update" type="primary" shape="round" size='large'>Update</Button></Link>
+        <Button name="delete" type="danger" shape="round" size='large'>Delete</Button>
+      </Space>
+    ),
   },
 
   
@@ -118,6 +132,7 @@ const Menu = () => {
 
   }, []);
   let navigate = useNavigate();
+
   return (
     
 

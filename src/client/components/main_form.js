@@ -1,6 +1,6 @@
 import { InboxOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
-import { PickerOverlay } from 'filestack-react';
+// import { PickerOverlay } from 'filestack-react';
 const { Dragger } = Upload;
 
 const props = {

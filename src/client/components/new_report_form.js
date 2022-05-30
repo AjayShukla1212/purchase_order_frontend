@@ -6,7 +6,7 @@ import { Select, Form, Input, Button,Upload } from 'antd';
 import { useState } from 'react';
 import './new_report.css';
 import { MAIN_URL } from '../../constant';
-import Upload_page from './main_form';
+ import Upload_page from './main_form';
 import ShowDetails from '../view_details';
 const { Option } = Select;
 const {TextArea}=Input;
@@ -43,7 +43,9 @@ function Demo() {
         setitem_amount(value);
     }
     const onFinish = (values) => {
+
         const student = { po_number, company_name, po_date, vendor_name, payment_terms, required_date, description, item_amount }
+
         //console.log(student);
         setIsSubmitted(true);
         fetch('http://localhost:8080/report', {
