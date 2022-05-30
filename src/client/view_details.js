@@ -13,7 +13,7 @@ function ShowDetails() {
             .then((result) => {
                 console.log(result);
                 setreport_id(result);
-                setSelect(true)
+                //setSelect(true)
             }
             )
     }
@@ -28,14 +28,15 @@ function ShowDetails() {
             .then(res => res.json())
             .then((result) => {
                 console.log(result);
-                setreport_id(result);
+                //setreport_id(result);
 
             }
             )
-        console.log(isSelect)
+        console.log(report_id)
     }, [isSelect])
     function fun() {
         setSelect(!isSelect);
+        console.log(isSelect);
     }
     return (<div>
         <div>

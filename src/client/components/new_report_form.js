@@ -27,7 +27,7 @@ function Demo() {
     const [sgst, setSgst] = useState(0)
     const [igst, setIgst] = useState(0)
     const [tds, setTds] = useState(0)
-    const [issubmitted, setIsSubmitted] = useState(false);
+    const [issubmitted, setIsSubmitted] = useState(true);
     const handle_po_Date = (date, dateString) => {
         setpo_date(dateString);
 

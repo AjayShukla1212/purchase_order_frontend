@@ -1,7 +1,9 @@
 import React from 'react';
 // import './MiniDesc.css';
 const MiniDesc = (props) => {
+    console.log(props.report);
     return (
+
         <div className='tabledesc'>
 
             <table>
