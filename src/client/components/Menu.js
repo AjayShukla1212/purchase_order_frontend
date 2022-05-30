@@ -1,21 +1,66 @@
-import React, { useState, useEffect } from 'react';
+import React,{useState, useEffect} from 'react';
 
-import { Table, Tag, Space, Button } from 'antd';
+import { Table, Space, Button } from 'antd';
 
 import { useNavigate, Link } from 'react-router-dom';
 
-import axios from "axios";
+import axios from 'axios';
+
+import { MAIN_URL } from '../../constant';
+import ViewPo from './ViewPoNumber';
+
+const getId = async(val)=>{
+  await fetch(`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${val}`)
+  .then(temp =>temp.data.json())
+  .then(result=>{
+    console.log(result);
+    return <ViewPo report = {result}/>
+  })
+}
 
 
+ const handleClick = (e) => {
+    e.preventDefault();
+    console.log('The link was clicked.');
+  //   await fetch(`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${val}`)
+  // .then(temp =>temp.data.json())
+  // .then(result=>{
+  //   console.log(result);
+  //   return <ViewPo report = {result}/>
+  // })
+  };
 
 const columns = [
+  // {
+  //   title: 'Id',
+  //   dataIndex:'id',
+  //   key: 'id',
+  //   render: text => <a  onClick={handleClick} >{text}</a>
+  //   // href={`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${text}`}
+  // },
+
+  // {
+  //   title: 'Id',
+  //   key: 'id',
+  //   render: (text, record) => (
+  //     <Space size="middle">
+  //       <a  href={`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${record.id}`}>{text}</a>
+  //       {/* <Button name="update" type="primary" shape="round" size='large'>Update</Button>
+  //       <Button name="delete" type="danger" shape="round" size='large'>Delete</Button> */}
+        
+
+  //     </Space>
+  //   ),
+  // },
+  
   {
-    title: 'Purchase Order',
-    dataIndex: 'po_number',
+    title: 'PO Number',
+    dataIndex:'po_number',
     key: 'po_number',
-  },
+     render: (text,record) => <a onClick={handleClick} href={`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${record.id}`}>{text}</a>
+   },
   {
-    title: 'Company Name',
+    title: 'Owner Name',
     dataIndex: 'company_name',
     key: 'company_name',
     // render: text => <a>{text}</a>,
@@ -27,15 +72,15 @@ const columns = [
   },
 
   {
-    title: 'Shipping Method',
-    dataIndex: 'shipping_method',
-    key: 'shipping_method',
+    title: 'Date',
+    dataIndex: 'date',
+    key: 'date',
   },
 
   {
-    title: 'Quantity',
-    dataIndex: 'quantity',
-    key: 'quantity',
+    title: 'Expected Delivery',
+    dataIndex: 'delivery_date',
+    key: 'delivery_date',
   },
 
   {
@@ -55,62 +100,23 @@ const columns = [
       </Space>
     ),
   },
+
+  
 ];
 
-// const data = [
-//   {
-//     key: '1',
-//     po_number:'122312',
-//     name: 'John Brown',
-//     po_date: '12-04-2022',
-//     vendor: "Zaggle",
-//     shippingMethod: "Cash",
-//     paymentTerms: "Lorem Epsum",
-//     requiredDate: "12.05.2022",
-//     itemDescription: "Something1",
-//     quantity: "2",
-//     itemAmount: "2134",
-//   },
-//   {
-//     key: '2',
-//     po:'122982',
-//     name: 'Jim Green',
-//     po_date: '12-10-2022',
-//     vendor: "Zaggle",
-//     shippingMethod: "UPI",
-//     paymentTerms: "Lorem Epsum",
-//     requiredDate: "02.05.2022",
-//     itemDescription: "Something2",
-//     quantity: "6",
-//     itemAmount: "4124"
-
-//   },
-//   {
-//     key: '3',
-//     po_number:'122365',
-//     name: 'Joe Black',
-//     po_date: '21-03-2022',
-//     vendor: "Zaggle",
-//     shippingMethod: "Card",
-//     paymentTerms: "Lorem Epsum",
-//     requiredDate: "07.05.2022",
-//     itemDescription: "Something3",
-//     quantity: "4",
-//     itemAmount: "9876"
-
-//   },
-// ];
 
 
 const Menu = () => {
-  const [invoice, setInvoice] = useState([]);
-  // useEffect(() =>{
-  //   fetch("https://b70c-183-82-114-140.in.ngrok.io/api/v1/invoices")
-  //     .then(res => res.json())
-  //     .then((result)=>{
-  //       setInvoice(result);
-  //     }).then(console.log(invoice))
-  // },[])
+   const [invoice,setInvoice] = useState([]);
+
+  
+  useEffect(() =>{
+    fetch("https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders")
+      .then(res => res.json())
+      .then((result)=>{
+        setInvoice(result);
+      }).then(console.log(invoice))
+  },[])
 
   useEffect(() => {
 
@@ -126,26 +132,33 @@ const Menu = () => {
         }
       })
 
-      return await res.json();
-    }
-    fetchData().then(res => {
-      console.log(res)
-      setInvoice(res)
-    })
+             return await res.json();
+        }
+   fetchData().then(res=>{console.log(res)
+    setInvoice(res)
+})
 
+   
 
+    console.log(invoice)
 
   }, []);
   let navigate = useNavigate();
 
   return (
+    
 
 
     <div style={{ padding: "20px" }}>
-      <Button type="primary" shape='round' size='large' onClick={() => { navigate("/newreport")}}> + Add Purchase Order</Button>
+      <Button type="primary" shape='round' size='large' onClick={() => { navigate("/newreport") }}> + Add Purchase Order</Button>
+      {/* <Button type="primary" shape='round' size='large' onClick={() => { navigate("/upload") }}> + Upload</Button>
+      <Button type="primary" shape='round' size='large' onClick={() => { navigate("/getdetails") }}> + GetDetails</Button> */}
       <Table columns={columns} dataSource={invoice} />
+      {/* {
+        invoice.map(temp => (<h1>{temp.id}</h1>) )
+      } */}
     </div>
-
+    
 
 
   )
