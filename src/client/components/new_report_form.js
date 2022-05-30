@@ -16,7 +16,7 @@ function Demo() {
     const [company_name, setcompany_name] = useState('')
     const [po_date, setpo_date] = useState('')
     const [vendor_name, setvendor_name] = useState('')
-    const [descrption,setDescription] = useState('')
+    const [description,setDescription] = useState('')
     const [payment_terms, setpayment_term] = useState('')
     const [required_date, setrequired_date] = useState('')
     const [item_amount, setitem_amount] = useState(0)
@@ -43,7 +43,9 @@ function Demo() {
         setitem_amount(value);
     }
     const onFinish = (values) => {
-        const student = { po_number, company_name, po_date, vendor_name, payment_terms, required_date, item_amount }
+
+        const student = { po_number, company_name, po_date, vendor_name, payment_terms, required_date, description, item_amount }
+
         //console.log(student);
         setIsSubmitted(true);
         fetch('http://localhost:8080/report', {
@@ -252,9 +254,10 @@ function Demo() {
                         name="descption"
                        
                     >
-                        <TextArea placeholder="Add description to purchase order" rows={4} value={descrption}
+                        <TextArea placeholder="Add description to purchase order" rows={4} value={description}
                             onChange={(e)=>{setDescription(e.target.value)}} />
                     </Form.Item>
+
                 </div>
                 <Upload >
                 <label style={{'padding-bottom':'2em'}}><strong>Upload File(s) related to purchase order</strong></label><br/>
