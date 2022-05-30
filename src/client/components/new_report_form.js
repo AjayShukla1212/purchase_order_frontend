@@ -45,10 +45,10 @@ function Demo() {
         setitem_amount(value);
     }
     const onFinish = (values) => {
-        const student = { po_number, company_name, po_date, vendor_name, shipping_method, payment_terms, required_date, item_amount }
-        //setIsSubmitted(true);
-        // success();
-        fetch('http://localhost:8080/report', {
+        const student = { po_number, company_name, po_date, vendor_name, payment_terms, required_date, item_amount }
+        //console.log(student);
+        setIsSubmitted(true);
+        fetch('https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(student)
