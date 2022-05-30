@@ -18,7 +18,7 @@ function RRoutes() {
                 <Route path='/error' element={<ErrorNotification />} />
                 <Route path='/upload' element={<Upload_page />} />
                 <Route path='/getdetails' element={<ShowDetails />} />
-                <Route path='/view' element={<ViewPo />} />
+                <Route path='/view/:id' element={<ViewPo />} />
             </Routes>
         </BrowserRouter>
     )
