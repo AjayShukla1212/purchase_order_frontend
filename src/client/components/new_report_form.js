@@ -155,7 +155,7 @@ function Demo() {
                             },
                         ]}
                     >
-                        <Select placeholder='enter shipping method' value={payment_terms}
+                        <Select placeholder='enter payment terms' value={payment_terms}
                             onChange={setpayment_term}>
                             <Option value='Payment term1'>Payment term1</Option>
                             <Option value='Payment term2'>Payment term2</Option>
