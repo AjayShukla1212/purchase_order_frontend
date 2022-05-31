@@ -1,5 +1,5 @@
 import React from 'react';
-import './MiniDesc.css';    
+import './MiniDesc.css';
 
 import { Descriptions } from 'antd';
 const MiniDesc = (props) => {
@@ -12,19 +12,19 @@ const MiniDesc = (props) => {
     <div className='tabledesc'>
       <table>
         <tr>
-            <th>Vendor Name:</th>
-            <td>{props.name}</td>
+          <th>Vendor Name:</th>
+          <td>{props.name}</td>
         </tr>
         <tr>
-            <th>Email Id:</th>
-            <td>{props.email}</td>
+          <th>Email Id:</th>
+          <td>{props.email}</td>
         </tr>
         <tr>
-            <th>Address:</th>
-            <td>{props.address}</td>
+          <th>Address:</th>
+          <td>{props.address}</td>
         </tr>
-        
-    </table>
+
+      </table>
     </div>
   )
 }

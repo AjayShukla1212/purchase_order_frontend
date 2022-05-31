@@ -8,7 +8,7 @@ function ShowDetails() {
     const [report_id, setreport_id] = useState({});
     const [isSelect, setSelect] = useState(false);
     const setforgetdetails = async () => {
-        await fetch(`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders`)
+        await fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders`)
             .then(res => console.log(res))
             .then((result) => {
                 console.log(result);
@@ -24,7 +24,7 @@ function ShowDetails() {
         //         setreport(result);
         //     }
         //     )
-        fetch(`https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders`)
+        fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders`)
             .then(res => res.json())
             .then((result) => {
                 console.log(result);

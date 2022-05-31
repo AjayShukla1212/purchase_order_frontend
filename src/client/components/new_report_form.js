@@ -12,16 +12,12 @@ const { Option } = Select;
 const { TextArea } = Input;
 function Demo() {
     debugger;
-    const [po_number, setpo_number] = useState(0)
-    const [company_name, setcompany_name] = useState('')
-    const [po_date, setpo_date] = useState('')
-    const [vendor_name, setvendor_name] = useState('')
-    const [descrption, setDescription] = useState('')
+    const [po_number, setpo_number] = useState(0);
+    const [date, setpo_date] = useState('')
+    const [description, setDescription] = useState('')
     const [payment_terms, setpayment_term] = useState('')
-    const [required_date, setrequired_date] = useState('')
-    const [shipping_method, setshipping_method] = useState('')
-
-    const [item_amount, setitem_amount] = useState(0)
+    const [delivery_date, setrequired_date] = useState('')
+    const [amount, setitem_amount] = useState(0)
     const [total_amount, setTotal] = useState(0)
     const [cgst, setCgst] = useState(0)
     const [sgst, setSgst] = useState(0)
@@ -45,10 +41,12 @@ function Demo() {
         setitem_amount(value);
     }
     const onFinish = (values) => {
-        const student = { po_number, company_name, po_date, vendor_name, payment_terms, required_date, item_amount }
-        //console.log(student);
+
+        const student = { po_number, delivery_date, date, amount, cgst, sgst, igst, tds, description, total_amount }
+
+        console.log(student);
         setIsSubmitted(true);
-        fetch('https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders', {
+        fetch('https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(student)
@@ -100,7 +98,7 @@ function Demo() {
                             },
                         ]}
                     >
-                        <InputNumber placeholder="Enter Company Name"
+                        <InputNumber placeholder="Enter P O Number"
                             onChange={setpo_number_in} />
                     </Form.Item>
                 </div>
@@ -146,7 +144,7 @@ function Demo() {
                             },
                         ]}
                     >
-                        <DatePicker placeholder='enter Required Date'
+                        <DatePicker placeholder='enter Delivery Date'
                             onChange={handleDate} />
                     </Form.Item>
                 </div>
@@ -181,7 +179,7 @@ function Demo() {
                             },
                         ]}
                     >
-                        <InputNumber placeholder='Enter the amount ' value={item_amount}
+                        <InputNumber placeholder='Enter the amount ' value={amount}
                             onChange={setitem_amount_in} />
                     </Form.Item>
                 </div>
@@ -241,7 +239,7 @@ function Demo() {
                             },
                         ]}
                     >
-                        <InputNumber placeholder='Enter the amount ' value={tds}
+                        <InputNumber placeholder='Enter the TDS ' value={tds}
                             onChange={(e) => { setTds(e.target.value) }} />
                     </Form.Item>
                 </div>
@@ -258,10 +256,10 @@ function Demo() {
                         name="descption"
 
                     >
-
-                        <TextArea placeholder="Add description to purchase order" rows={4} value={descrption}
+                        <TextArea placeholder="Add description to purchase order" rows={4} value={description}
                             onChange={(e) => { setDescription(e.target.value) }} />
                     </Form.Item>
+
                 </div>
                 <Upload >
                     <label style={{ 'padding-bottom': '2em' }}><strong>Upload File(s) related to purchase order</strong></label><br />

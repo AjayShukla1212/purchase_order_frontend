@@ -2,33 +2,21 @@ import React, { useState, useEffect } from 'react';
 
 import { Table, Space, Button } from 'antd';
 
-import { useNavigate, Link } from 'react-router-dom';
 
-import axios from 'axios';
+
+import { Link, useNavigate } from 'react-router-dom';
 
 import { MAIN_URL } from '../../constant';
 import ViewPo from './ViewPoNumber';
 
 const getId = async (val) => {
-  await fetch(`https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${val}`)
+  await fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders/${val}`)
     .then(temp => temp.data.json())
     .then(result => {
       console.log(result);
       return <ViewPo report={result} />
     })
 }
-
-
-const handleClick = (e) => {
-  e.preventDefault();
-  console.log('The link was clicked.');
-  //   await fetch(`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${val}`)
-  // .then(temp =>temp.data.json())
-  // .then(result=>{
-  //   console.log(result);
-  //   return <ViewPo report = {result}/>
-  // })
-};
 
 const columns = [
   // {
@@ -57,8 +45,11 @@ const columns = [
     title: 'PO Number',
     dataIndex: 'po_number',
     key: 'po_number',
-    render: (text, record) => <a onClick={handleClick} href={`https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${record.id}`}>{text}</a>
+    render: (text, record) => <Link to={{ pathname: `/view/${record.id}` }}>{text}</Link>
   },
+
+
+
   {
     title: 'Owner Name',
     dataIndex: 'company_name',
@@ -111,7 +102,7 @@ const Menu = () => {
 
 
   useEffect(() => {
-    fetch("https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders")
+    fetch("https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders")
       .then(res => res.json())
       .then((result) => {
         setInvoice(result);
@@ -124,7 +115,7 @@ const Menu = () => {
 
 
 
-      const res = await fetch('https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders', {
+      const res = await fetch('https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders', {
 
         method: "GET",
         headers: {

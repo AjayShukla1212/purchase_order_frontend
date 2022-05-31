@@ -27,7 +27,7 @@ function Update() {
     };
 
     const loadInvoice = async () => {
-        const result = await axios.get(`https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${id}`);
+        const result = await axios.get(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders/${id}`);
         let data = await result.data;
         setInvoice(data);
     };
@@ -39,7 +39,7 @@ function Update() {
 
     const onFinish = (values) => {
         setInvoice({ ...invoice, isSubmitted: true });
-        fetch(`https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${id}`, {
+        fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders/${id}`, {
             method: 'PUT',
             headers: {
                 // 'Accept':'application/json',

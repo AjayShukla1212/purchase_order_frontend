@@ -6,7 +6,7 @@ const { Dragger } = Upload;
 const props = {
     name: 'file',
     multiple: true,
-    action: 'https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders',
+    action: 'https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders',
 
     onChange(info) {
         const { status } = info.file;
