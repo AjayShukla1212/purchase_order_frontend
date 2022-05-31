@@ -8,18 +8,19 @@ import './new_report.css';
 import { MAIN_URL } from '../../constant';
  import Upload_page from './main_form';
 import ShowDetails from '../view_details';
+import moment from 'moment';
 const { Option } = Select;
 const {TextArea}=Input;
+
 function Demo() {
     debugger;
     const [po_number, setpo_number] = useState(0)
-    const [company_name, setcompany_name] = useState('')
     const [date, setpo_date] = useState('')
     const [vendor_name, setvendor_name] = useState('')
     const [descrption,setDescription] = useState('')
     const [payment_terms, setpayment_term] = useState('')
     const [delivery_date, setrequired_date] = useState('')
-    const [item_amount, setitem_amount] = useState(0)
+    const [amount, setitem_amount] = useState(0)
     const [total_amount,setTotal]=useState(0)
     const [cgst, setCgst] = useState(0)
     const [sgst, setSgst] = useState(0)
@@ -43,16 +44,17 @@ function Demo() {
         setitem_amount(value);
     }
     const onFinish = (values) => {
-        const student = { po_number, delivery_date, date,item_amount,cgst,sgst,igst,tds,descrption};
+        const student = { po_number, delivery_date, date,amount,cgst,sgst,igst,tds,descrption }
         //console.log(student);
         setIsSubmitted(true);
-        fetch('https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders', {
+        fetch(`${MAIN_URL}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(student)
 
         }).then(() => {
             //setIsSubmitted(true);
+            console.log(student)
             console.log("done");
         })
     }
@@ -98,21 +100,6 @@ function Demo() {
                             onChange={setpo_number_in} />
                     </Form.Item>
                 </div>
-                {/* <div className='input-container'>
-                    <Form.Item
-                        label="Company Name"
-                        name="company_name"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your Company Name!',
-                            },
-                        ]}
-                    >
-                        <Input placeholder="Enter Company Name" value={company_name}
-                            onChange={(e) => setcompany_name(e.target.value)} />
-                    </Form.Item>
-                </div> */}
                 <div className='input-container'>
                     <Form.Item
                         label="Date"
@@ -141,7 +128,12 @@ function Demo() {
                         ]}
                     >
                         <DatePicker placeholder='enter Required Date'
-                            onChange={handleDate} />
+                            onChange={handleDate}
+                            disabledDate={(current) => {
+              let customDate = moment(date).format("YYYY-MM-DD");
+              return (current&&current) < moment(customDate, "YYYY-MM-DD");
+            }} 
+                             />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -175,7 +167,7 @@ function Demo() {
                             },
                         ]}
                     >
-                        <InputNumber placeholder='Enter the amount ' value={item_amount}
+                        <InputNumber placeholder='Enter the amount ' value={amount}
                             onChange={setitem_amount_in} />
                     </Form.Item>
                 </div>
@@ -191,7 +183,7 @@ function Demo() {
                         ]}
                     >
                         <InputNumber placeholder='Enter the amount ' value={cgst}
-                            onChange={(e)=>{setCgst(e.target.value)}} />
+                            onChange={(value)=>{setCgst(value)}} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -206,7 +198,7 @@ function Demo() {
                         ]}
                     >
                         <InputNumber placeholder='Enter the amount ' value={sgst}
-                            onChange={(e)=>{setSgst(e.target.value)}} />
+                            onChange={(value)=>{setSgst(value)}} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -221,7 +213,7 @@ function Demo() {
                         ]}
                     >
                         <InputNumber placeholder='Enter the amount ' value={igst}
-                            onChange={(e)=>{setIgst(e.target.value)}} />
+                            onChange={(value)=>{setIgst(value)}} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -236,7 +228,7 @@ function Demo() {
                         ]}
                     >
                         <InputNumber placeholder='Enter the amount ' value={tds}
-                            onChange={(e)=>{setTds(e.target.value)}} />
+                            onChange={(value)=>{setTds(value)}} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -253,7 +245,7 @@ function Demo() {
                        
                     >
                         <TextArea placeholder="Add description to purchase order" rows={4} value={descrption}
-                            onChange={(e)=>{setDescription(e.target.value)}} />
+                            onChange={(value)=>{setDescription(value)}} />
                     </Form.Item>
                 </div>
                 <Upload >

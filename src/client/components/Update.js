@@ -5,6 +5,7 @@ import { Select, Form, Input, Button, Checkbox } from 'antd';
 import React,{ useState, useEffect } from 'react';
 import { useParams, useNavigate} from 'react-router-dom';
 import axios from "axios";
+import { MAIN_URL } from '../../constant';
 const { Option } = Select;
 
 function Update() {
@@ -28,7 +29,7 @@ const onInputChange = e => {
 };
 
 const loadInvoice = async () => {
-    const result = await axios.get(`https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${id}`);
+    const result = await axios.get(`${MAIN_URL}/${id}`);
     let data= await result.data;
     setInvoice(data.data);
     console.log(data.data);
