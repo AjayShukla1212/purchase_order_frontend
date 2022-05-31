@@ -7,11 +7,11 @@ import { Table, Space, Button } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { MAIN_URL } from '../../constant';
-import ViewPo from './ViewPoNumber';
 
 
 const columns = [
- {
+  
+  {
     title: 'PO Number',
     dataIndex: 'po_number',
     key: 'po_number',
@@ -23,7 +23,6 @@ const columns = [
     title: 'Owner Name',
     dataIndex: 'company_name',
     key: 'company_name',
-    // render: text => <a>{text}</a>,
   },
   {
     title: 'Vendor Name',
@@ -68,6 +67,8 @@ const columns = [
 
 const Menu = () => {
   const [invoice, setInvoice] = useState([]);
+
+
   
   useEffect(() =>{
     fetch(`${MAIN_URL}`)

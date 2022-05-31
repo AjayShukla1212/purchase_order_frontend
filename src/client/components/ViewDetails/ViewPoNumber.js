@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+<<<<<<< HEAD:src/client/components/ViewPoNumber.js
 import { MAIN_URL } from '../../constant';
 import PoNav from './PurchaseOrderDetails';
+=======
+//import PoNav from './PurchaseOrderDetails';
+>>>>>>> 1607ee2f59075ddd7cfe82a4dc4b7df07583460d:src/client/components/ViewDetails/ViewPoNumber.js
 import { Menu } from 'antd';
 
 const ViewPo = () => {
-    const [isflag, setisflag] = useState(false);
-    const [isflag1, setisflag1] = useState(false);
-    const [isflag2, setisflag2] = useState(false);
+   
     const { id } = useParams();
     const [Data, setData] = useState({});
     console.log(id);
@@ -67,16 +69,16 @@ const ViewPo = () => {
         </div >
 
     );
-    const render_history = (
-        <div>
-            <h1>History of this Invoice is..........</h1>
-        </div>
-    );
-    const render_comments = (
-        <div>
-            <h1>Comments.........</h1>
-        </div>
-    );
+    // const render_history = (
+    //     <div>
+    //         <h1>History of this Invoice is..........</h1>
+    //     </div>
+    // );
+    // const render_comments = (
+    //     <div>
+    //         <h1>Comments.........</h1>
+    //     </div>
+    // );
     return (
         <div className='Main-section'>
 
