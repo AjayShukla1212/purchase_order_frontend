@@ -6,35 +6,46 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
 const { Option } = Select;
+const {TextArea}=Input;
 
 function Update() {
     let navigate = useNavigate();
-    const { id } = useParams();
-    const [invoice, setInvoice] = useState({
-        company_name: "",
-        vendor_name: "",
-        shipping_method: "",
-        required_date: "",
-        payment_terms: "",
-        item_description: "",
-        quantity: "",
-        item_amount: "",
-        isSubmitted: false
-    });
-    const { company_name, vendor_name, shipping_method, required_date, payment_terms, item_description, quantity, item_amount, isSubmitted } = invoice;
-    const onInputChange = e => {
-        setInvoice({ ...invoice, [e.target.name]: e.target.value });
-    };
 
-    const loadInvoice = async () => {
-        const result = await axios.get(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders/${id}`);
-        let data = await result.data;
-        setInvoice(data);
-    };
+const {id} = useParams();
+const [invoice, setInvoice] = useState({
+    company_name: "",
+    vendor_name: "",
+    shipping_method: "",
+    required_date: "",
+    payment_terms: "",
+    description: "",
+    quantity: "",
+    date: "",
+    delivery_date: "",
+    amount: 0,
+    cgst: 0,
+    sgst: 0,
+    igst: 0,
+    tds: 0,
+    total_amount: 0,
+    isSubmitted: false
+});
+const {company_name, vendor_name, shipping_method, required_date, payment_terms, description, quantity, date, delivery_date,amount, cgst, sgst, igst,tds, total_amount, isSubmitted} = invoice;
+const onInputChange = e => {
+    setInvoice({ ...invoice, [e.target.name]: e.target.value});
+};
+
+const loadInvoice = async () => {
+    const result = await axios.get(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders/${id}`);
+    let data= await result.data.data;
+    console.log(data);
+    setInvoice(data);
+};
 
     useEffect(() => {
         loadInvoice();
     }, []);
+
 
 
     const onFinish = (values) => {
@@ -77,7 +88,7 @@ function Update() {
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
-                <div className='input-container'>
+                {/* <div className='input-container'>
                     <Form.Item
                         label="Company Name"
                         rules={[
@@ -87,25 +98,131 @@ function Update() {
                             },
                         ]}
                     >
-                        <Input name="company_name" value={company_name} onChange={e => onInputChange(e)} />
+                        <Input name="company_name"/>
                     </Form.Item>
-                </div>
-                {/* <div className='input-container'>
+                </div> */}
+                <div className='input-container'>
                     <Form.Item
-                        label="PO Date"
-                        name="po_date"
-
+                        label="Date"
                         rules={[
                             {
-                                required: false,
+                                required: true,
                                 message: 'Please input Product Order Date!',
                             },
                         ]}
                     >
-                        <DatePicker value={po_date} placeholder={po_date} onChange={e => onInputChange(e)}/>
+                        <DatePicker placeholder={date}/>
                     </Form.Item>
-                </div> */}
+                </div>
                 <div className='input-container'>
+                    <Form.Item
+                        label="Required Date"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input Required Order Date!',
+                            },
+                        ]}
+                    >
+                        <DatePicker placeholder={delivery_date}/>
+                    </Form.Item>
+                </div>
+                <div className='input-container'>
+                    <Form.Item
+                        label="Payment Term"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your Payment Term!',
+                            },
+                        ]}
+                    >
+                        <Select>
+                            <Option value='Payment term1'>Payment term1</Option>
+                            <Option value='Payment term2'>Payment term2</Option>
+                            <Option value='Payment term3'>Payment term3</Option>
+                            <Option value='Payment term4'>Payment term4</Option>
+                        </Select>
+                    </Form.Item>
+                </div>
+                <div className='input-container'>
+                    <Form.Item
+                        label="Amount"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input Rate of Product!',
+                            },
+                        ]}
+                    >
+                        <Input name="amount" value={amount} onChange={e => onInputChange(e)} />
+                    </Form.Item>
+                </div>
+                <div className='input-container'>
+                    <Form.Item
+                        label="CGST %"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input Rate of Product!',
+                            },
+                        ]}
+                    >
+                        <InputNumber name="cgst" value={cgst} onChange={e => onInputChange(e)}/>
+                    </Form.Item>
+                </div>
+                <div className='input-container'>
+                    <Form.Item
+                        label="SGST %"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input Rate of Product!',
+                            },
+                        ]}
+                    >
+                        <InputNumber name="sgst" value={sgst} onChange={e => onInputChange(e)} />
+                    </Form.Item>
+                </div>
+                <div className='input-container'>
+                    <Form.Item
+                        label="IGST %"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input Rate of Product!',
+                            },
+                        ]}
+                    >
+                        <InputNumber name="igst" value={igst} onChange={e => onInputChange(e)} />
+                    </Form.Item>
+                </div>
+                <div className='input-container'>
+                    <Form.Item
+                        label="TDS %"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input Rate of Product!',
+                            },
+                        ]}
+                    >
+                        <InputNumber name="tds" value={tds} onChange={e => onInputChange(e)}/>
+                    </Form.Item>
+                </div>
+                <div className='input-container'>
+                    <Form.Item>
+                    <label><strong style={{"padding-right":"2.5em"}}>Total amount</strong></label>
+                        <InputNumber name="total_amount" value={total_amount} onChange={e => onInputChange(e)}/>
+                    </Form.Item>
+                </div>
+                <label>Description</label>
+                <div className='input-container'>
+                    <Form.Item>
+                        <TextArea rows={4} name="description" value={description} onChange={e => onInputChange(e)}/>
+                    </Form.Item>
+                </div>
+                {/* <div className='input-container'>
                     <Form.Item
                         label="Vendor Name"
                         rules={[
@@ -149,7 +266,7 @@ function Update() {
                     >
                         <Input name="payment_terms" value={payment_terms} onChange={e => onInputChange(e)} />
                     </Form.Item>
-                </div>
+                </div> */}
                 {/* <div className='input-container'>
                      <Form.Item 
                         label="Required Date"
@@ -165,7 +282,7 @@ function Update() {
                         <Input name="required_date" value={required_date} placeholder={required_date} onChange={e => onInputChange(e)}/>
                     </Form.Item>
                 </div> */}
-                <div className='input-container'>
+                {/* <div className='input-container'>
                     <Form.Item
                         label="Item Description"
                         rules={[
@@ -201,9 +318,9 @@ function Update() {
                             },
                         ]}
                     >
-                        <Input name="item_amount" value={item_amount} onChange={e => onInputChange(e)} />
+                        <Input name="amount" value={amount} onChange={e => onInputChange(e)} />
                     </Form.Item>
-                </div>
+                </div> */}
                 <div className='input-container'>
                     <Form.Item
                         name="remember"

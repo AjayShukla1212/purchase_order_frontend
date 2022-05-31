@@ -9,13 +9,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { MAIN_URL } from '../../constant';
 import ViewPo from './ViewPoNumber';
 
-const getId = async (val) => {
-  await fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders/${val}`)
-    .then(temp => temp.data.json())
-    .then(result => {
-      console.log(result);
-      return <ViewPo report={result} />
-    })
+
+const getId = async(val)=>{
+  await fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders${val}`)
+  .then(temp =>temp.data.json())
+  .then(result=>{
+    console.log(result);
+    return <ViewPo report = {result}/>
+  })
+
 }
 
 const columns = [
@@ -45,10 +47,9 @@ const columns = [
     title: 'PO Number',
     dataIndex: 'po_number',
     key: 'po_number',
+
     render: (text, record) => <Link to={{ pathname: `/view/${record.id}` }}>{text}</Link>
   },
-
-
 
   {
     title: 'Owner Name',
@@ -99,9 +100,8 @@ const columns = [
 
 const Menu = () => {
   const [invoice, setInvoice] = useState([]);
-
-
-  useEffect(() => {
+  
+  useEffect(() =>{
     fetch("https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders")
       .then(res => res.json())
       .then((result) => {
