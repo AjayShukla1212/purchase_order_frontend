@@ -1,12 +1,12 @@
 import { InboxOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
-import { PickerOverlay } from 'filestack-react';
+// import { PickerOverlay } from 'filestack-react';
 const { Dragger } = Upload;
 
 const props = {
     name: 'file',
     multiple: true,
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    action: 'https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders',
 
     onChange(info) {
         const { status } = info.file;
@@ -38,11 +38,6 @@ const Upload_page = () => (
             band files
         </p>
     </Dragger>
-//     <PickerOverlay
-//   apikey={'Av8CcCYvOQJqbe1GXUxJkz'}
-//   onSuccess={(res) => console.log(res)}
-//   onUploadDone={(res) => console.log(res)}
-// />
 );
 
 export default Upload_page;
