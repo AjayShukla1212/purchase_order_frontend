@@ -7,7 +7,6 @@ import { Table, Space, Button } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { MAIN_URL } from '../../constant';
-import ViewPo from './ViewPoNumber';
 
 
 const columns = [

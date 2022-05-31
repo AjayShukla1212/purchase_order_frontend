@@ -3,9 +3,7 @@ import { useParams } from 'react-router-dom';
 //import PoNav from './PurchaseOrderDetails';
 import { Menu } from 'antd';
 const ViewPo = () => {
-    const [isflag, setisflag] = useState(false);
-    const [isflag1, setisflag1] = useState(false);
-    const [isflag2, setisflag2] = useState(false);
+   
     const { id } = useParams();
     const [Data, setData] = useState({});
     console.log(id);
@@ -65,16 +63,16 @@ const ViewPo = () => {
         </div >
 
     );
-    const render_history = (
-        <div>
-            <h1>History of this Invoice is..........</h1>
-        </div>
-    );
-    const render_comments = (
-        <div>
-            <h1>Comments.........</h1>
-        </div>
-    );
+    // const render_history = (
+    //     <div>
+    //         <h1>History of this Invoice is..........</h1>
+    //     </div>
+    // );
+    // const render_comments = (
+    //     <div>
+    //         <h1>Comments.........</h1>
+    //     </div>
+    // );
     return (
         <div className='Main-section'>
 
