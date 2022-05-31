@@ -12,17 +12,14 @@
 
 .app_category {
     /* background-image: url('https://image.shutterstock.com/image-vector/vector-illustration-background-social-media-260nw-1101609377.jpg'); */
-    font-family: sans-serif;
+    /* font-family: sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    /* gap: 20px;
-    height: 90vh; */
-
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
     background-position: center;
-    margin: auto;
+    margin: auto; */
 
 }
 
@@ -54,7 +51,7 @@
 .login-form {
     /* background-color: rgba(133, 212, 236, 0.7); */
     /* padding: 40px; */
-    
+
     flex: 0;
     width: 75%;
     align-items: center;
@@ -82,6 +79,4 @@
 
 }
 
-.app_category{
-    
-}
+.app_category {}

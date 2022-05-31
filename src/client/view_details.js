@@ -8,12 +8,12 @@ function ShowDetails() {
     const [report_id, setreport_id] = useState({});
     const [isSelect, setSelect] = useState(false);
     const setforgetdetails = async () => {
-        await fetch(`https://run.mocky.io/v3/bbc715a0-2f96-4559-8025-8b3b8e0f828b`)
+        await fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders`)
             .then(res => console.log(res))
             .then((result) => {
                 console.log(result);
                 setreport_id(result);
-                setSelect(true)
+                //setSelect(true)
             }
             )
     }
@@ -24,19 +24,20 @@ function ShowDetails() {
         //         setreport(result);
         //     }
         //     )
-        fetch(`https://run.mocky.io/v3/bbc715a0-2f96-4559-8025-8b3b8e0f828b`)
+        fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders`)
             .then(res => res.json())
             .then((result) => {
                 console.log(result);
-                 setreport_id(result);
-                
+                //setreport_id(result);
+
             }
             )
-        console.log(isSelect)
+        console.log(report_id)
     }, [isSelect])
-function fun(){
-    setSelect(!isSelect);
-}
+    function fun() {
+        setSelect(!isSelect);
+        console.log(isSelect);
+    }
     return (<div>
         <div>
 
@@ -60,13 +61,13 @@ function fun(){
                 <div className='input-container'>
                     <Form.Item
                         label="Vendor Name"
-                      
-                        
+
+
                     >
-                        <Select placeholder='select vendor name' onChange={fun} >
-                           
-                                <Option>{report_id.name}</Option>
-                           
+                        <Select placeholder='select vendor name'  >
+
+                            <Option onClick={fun}>{report_id.name}</Option>
+
                         </Select>
                     </Form.Item>
 

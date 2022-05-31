@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Table, Space, Button } from 'antd';
 
@@ -13,10 +13,12 @@ import ViewPo from './ViewPoNumber';
 const columns = [
  {
     title: 'PO Number',
-    dataIndex:'po_number',
+    dataIndex: 'po_number',
     key: 'po_number',
-     render: (text,record) => <Link   to={{pathname: `/view/${record.id}`}}>{text}</Link>
-   },
+
+    render: (text, record) => <Link to={{ pathname: `/view/${record.id}` }}>{text}</Link>
+  },
+
   {
     title: 'Owner Name',
     dataIndex: 'company_name',
@@ -53,28 +55,27 @@ const columns = [
       <Space size="middle">
         {/* <a>Invite {record.name}</a>
         <a>Delete</a> */}
-        <Link to={{pathname: `/update/${record.id}`}}><Button name="update" type="primary" shape="round" size='large'>Update</Button></Link>
+        <Link to={{ pathname: `/update/${record.id}` }}><Button name="update" type="primary" shape="round" size='large'>Update</Button></Link>
         <Button name="delete" type="danger" shape="round" size='large'>Delete</Button>
       </Space>
     ),
   },
 
-  
+
 ];
 
 
 
 const Menu = () => {
-   const [invoice,setInvoice] = useState([]);
-
+  const [invoice, setInvoice] = useState([]);
   
   useEffect(() =>{
     fetch(`${MAIN_URL}`)
       .then(res => res.json())
-      .then((result)=>{
+      .then((result) => {
         setInvoice(result);
       }).then(console.log(invoice))
-  },[])
+  }, [])
 
   useEffect(() => {
 
@@ -90,13 +91,14 @@ const Menu = () => {
         }
       })
 
-             return await res.json();
-        }
-   fetchData().then(res=>{console.log(res)
-    setInvoice(res)
-})
+      return await res.json();
+    }
+    fetchData().then(res => {
+      console.log(res)
+      setInvoice(res)
+    })
 
-   
+
 
     console.log(invoice)
 
@@ -104,7 +106,7 @@ const Menu = () => {
   let navigate = useNavigate();
 
   return (
-    
+
 
 
     <div style={{ padding: "20px" }}>
@@ -116,7 +118,7 @@ const Menu = () => {
         invoice.map(temp => (<h1>{temp.id}</h1>) )
       } */}
     </div>
-    
+
 
 
   )
