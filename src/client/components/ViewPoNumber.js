@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { MAIN_URL } from '../../constant';
 import PoNav from './PurchaseOrderDetails';
 import { Menu } from 'antd';
+
 const ViewPo = () => {
     const [isflag, setisflag] = useState(false);
     const [isflag1, setisflag1] = useState(false);
@@ -10,7 +12,7 @@ const ViewPo = () => {
     const [Data, setData] = useState({});
     console.log(id);
     useEffect(() => {
-        fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders/${id}`)
+        fetch(`${MAIN_URL}/${id}`)
             .then(res => res.json())
             .then((result) => {
                 setData(result.data);

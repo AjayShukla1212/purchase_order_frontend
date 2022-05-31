@@ -5,6 +5,7 @@ import { Select, Form, Input, Button, Checkbox } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { MAIN_URL } from '../../constant';
 const { Option } = Select;
 const {TextArea}=Input;
 
@@ -12,6 +13,7 @@ function Update() {
     let navigate = useNavigate();
 
 const {id} = useParams();
+console.log(id)
 const [invoice, setInvoice] = useState({
     company_name: "",
     vendor_name: "",
@@ -36,10 +38,10 @@ const onInputChange = e => {
 };
 
 const loadInvoice = async () => {
-    const result = await axios.get(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders/${id}`);
-    let data= await result.data.data;
-    console.log(data);
-    setInvoice(data);
+    const result = await axios.get(`${MAIN_URL}/${id}`);
+    let data= await result.data;
+    setInvoice(data.data);
+    console.log(data.data);
 };
 
     useEffect(() => {

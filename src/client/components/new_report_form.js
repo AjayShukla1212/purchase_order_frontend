@@ -8,6 +8,7 @@ import './new_report.css';
 import { MAIN_URL } from '../../constant';
 import Upload_page from './main_form';
 import ShowDetails from '../view_details';
+import moment from 'moment';
 const { Option } = Select;
 const { TextArea } = Input;
 function Demo() {
@@ -41,17 +42,17 @@ function Demo() {
         setitem_amount(value);
     }
     const onFinish = (values) => {
-
-        const student = { po_number, delivery_date, date, amount, cgst, sgst, igst, tds, description, total_amount }
-
-        console.log(student);
+        const student = { po_number, delivery_date, date,amount,cgst,sgst,igst,tds,descrption }
+        //console.log(student);
         setIsSubmitted(true);
-        fetch('https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders', {
+        fetch(`${MAIN_URL}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(student)
 
         }).then(() => {
+            //setIsSubmitted(true);
+            console.log(student)
             console.log("done");
             success();
         })
@@ -102,21 +103,6 @@ function Demo() {
                             onChange={setpo_number_in} />
                     </Form.Item>
                 </div>
-                {/* <div className='input-container'>
-                    <Form.Item
-                        label="Company Name"
-                        name="company_name"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your Company Name!',
-                            },
-                        ]}
-                    >
-                        <Input placeholder="Enter Company Name" value={company_name}
-                            onChange={(e) => setcompany_name(e.target.value)} />
-                    </Form.Item>
-                </div> */}
                 <div className='input-container'>
                     <Form.Item
                         label="Date"
@@ -144,8 +130,13 @@ function Demo() {
                             },
                         ]}
                     >
-                        <DatePicker placeholder='enter Delivery Date'
-                            onChange={handleDate} />
+                        <DatePicker placeholder='enter Required Date'
+                            onChange={handleDate}
+                            disabledDate={(current) => {
+              let customDate = moment(date).format("YYYY-MM-DD");
+              return (current&&current) < moment(customDate, "YYYY-MM-DD");
+            }} 
+                             />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -159,7 +150,7 @@ function Demo() {
                             },
                         ]}
                     >
-                        <Select placeholder='enter shipping method' value={payment_terms}
+                        <Select placeholder='enter payment terms' value={payment_terms}
                             onChange={setpayment_term}>
                             <Option value='Payment term1'>Payment term1</Option>
                             <Option value='Payment term2'>Payment term2</Option>
@@ -195,7 +186,7 @@ function Demo() {
                         ]}
                     >
                         <InputNumber placeholder='Enter the amount ' value={cgst}
-                            onChange={(e) => { setCgst(e.target.value) }} />
+                            onChange={(value)=>{setCgst(value)}} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -210,7 +201,7 @@ function Demo() {
                         ]}
                     >
                         <InputNumber placeholder='Enter the amount ' value={sgst}
-                            onChange={(e) => { setSgst(e.target.value) }} />
+                            onChange={(value)=>{setSgst(value)}} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -225,7 +216,7 @@ function Demo() {
                         ]}
                     >
                         <InputNumber placeholder='Enter the amount ' value={igst}
-                            onChange={(e) => { setIgst(e.target.value) }} />
+                            onChange={(value)=>{setIgst(value)}} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -239,8 +230,8 @@ function Demo() {
                             },
                         ]}
                     >
-                        <InputNumber placeholder='Enter the TDS ' value={tds}
-                            onChange={(e) => { setTds(e.target.value) }} />
+                        <InputNumber placeholder='Enter the amount ' value={tds}
+                            onChange={(value)=>{setTds(value)}} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -256,10 +247,9 @@ function Demo() {
                         name="descption"
 
                     >
-                        <TextArea placeholder="Add description to purchase order" rows={4} value={description}
-                            onChange={(e) => { setDescription(e.target.value) }} />
+                        <TextArea placeholder="Add description to purchase order" rows={4} value={descrption}
+                            onChange={(value)=>{setDescription(value)}} />
                     </Form.Item>
-
                 </div>
                 <Upload >
                     <label style={{ 'padding-bottom': '2em' }}><strong>Upload File(s) related to purchase order</strong></label><br />
