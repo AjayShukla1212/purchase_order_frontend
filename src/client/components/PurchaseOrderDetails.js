@@ -1,6 +1,7 @@
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import ViewPo from './ViewPoNumber';
+import View from './PoDetails';
 import { useState } from 'react';
 const PoNav = () => {
     const [isflag, setisflag] = useState(false);
