@@ -7,37 +7,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { MAIN_URL } from '../../constant';
 import ViewPo from './ViewPoNumber';
 
-const getId = async(val)=>{
-  await fetch(`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${val}`)
-  .then(temp =>temp.data.json())
-  .then(result=>{
-    console.log(result);
-    return <ViewPo report = {result}/>
-  })
-}
 
 const columns = [
-  // {
-  //   title: 'Id',
-  //   dataIndex:'id',
-  //   key: 'id',
-  //   render: text => <a  onClick={handleClick} >{text}</a>
-  //   // href={`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${text}`}
-  // },
-
-  // {
-  //   title: 'Id',
-  //   key: 'id',
-  //   render: (text, record) => (
-  //     <Space size="middle">
-  //       <a  href={`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${record.id}`}>{text}</a>
-  //       {/* <Button name="update" type="primary" shape="round" size='large'>Update</Button>
-  //       <Button name="delete" type="danger" shape="round" size='large'>Delete</Button> */}
-        
-
-  //     </Space>
-  //   ),
-  // },
   
   {
     title: 'PO Number',
@@ -49,7 +20,6 @@ const columns = [
     title: 'Owner Name',
     dataIndex: 'company_name',
     key: 'company_name',
-    // render: text => <a>{text}</a>,
   },
   {
     title: 'Vendor Name',
@@ -85,7 +55,7 @@ const Menu = () => {
 
   
   useEffect(() =>{
-    fetch("https://e150-183-82-114-140.in.ngrok.io/api/v1/purchaseorders")
+    fetch(`${MAIN_URL}`)
       .then(res => res.json())
       .then((result)=>{
         setInvoice(result);

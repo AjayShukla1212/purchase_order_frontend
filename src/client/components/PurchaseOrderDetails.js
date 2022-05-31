@@ -1,25 +1,33 @@
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
-import ViewPo from './ViewPoNumber';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import View from './PoDetails';
+
+const details = () =>{
+    return(
+        <div>
+        <h1>gfhdgsdf</h1>
+    </div>
+    )
+};
+        
+
 
 const PoNav = () => {
+    const[isflag, setisflag]=useState(true);
     
-    const detailsComp =() =>{
-        return(
-            <div>
-                <ViewPo/>
-            </div>
-        )
-    }
+    
     
 
     return (
+        <div>
         <Menu mode="horizontal" defaultSelectedKeys={['details']}>
-            <Menu.Item key="details" onSelect={detailsComp}>
+            <Menu.Item key="details" onClick={<View/>}>
                 Details
                 
             </Menu.Item>
-            <Menu.Item key = "History">
+            <Menu.Item key = "History" onClick={()=>console.log("hi")}>
                 History
             </Menu.Item>
 
@@ -28,6 +36,8 @@ const PoNav = () => {
             </Menu.Item>
 
         </Menu>
+        <View/>
+        </div>
     )
 };
 

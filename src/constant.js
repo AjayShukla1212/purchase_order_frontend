@@ -1,1 +1,1 @@
-export const MAIN_URL = 'https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders'
+export const MAIN_URL = 'https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders'
