@@ -10,7 +10,7 @@ import { MAIN_URL } from '../../constant';
 import ViewPo from './ViewPoNumber';
 
 const getId = async(val)=>{
-  await fetch(`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${val}`)
+  await fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders${val}`)
   .then(temp =>temp.data.json())
   .then(result=>{
     console.log(result);
@@ -57,7 +57,7 @@ const columns = [
     title: 'PO Number',
     dataIndex:'po_number',
     key: 'po_number',
-     render: (text,record) => <a onClick={handleClick} href={`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${record.id}`}>{text}</a>
+     render: (text,record) => <a onClick={handleClick} href={`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders/${record.id}`}>{text}</a>
    },
   {
     title: 'Owner Name',
@@ -111,7 +111,7 @@ const Menu = () => {
 
   
   useEffect(() =>{
-    fetch("https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders")
+    fetch("https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders")
       .then(res => res.json())
       .then((result)=>{
         setInvoice(result);
@@ -124,7 +124,7 @@ const Menu = () => {
 
 
 
-      const res = await fetch('http://localhost:8080/getreport', {
+      const res = await fetch('https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders', {
 
         method: "GET",
         headers: {
