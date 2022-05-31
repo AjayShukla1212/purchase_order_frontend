@@ -52,7 +52,7 @@ const loadInvoice = async () => {
 
     const onFinish = (values) => {
         setInvoice({ ...invoice, isSubmitted: true });
-        fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders/${id}`, {
+        fetch(`${MAIN_URL}/${id}`, {
             method: 'PUT',
             headers: {
                 // 'Accept':'application/json',

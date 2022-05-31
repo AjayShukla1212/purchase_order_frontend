@@ -19,7 +19,6 @@ function Demo() {
     const [payment_terms, setpayment_term] = useState('')
     const [delivery_date, setrequired_date] = useState('')
     const [amount, setitem_amount] = useState(0)
-    const [total_amount, setTotal] = useState(0)
     const [cgst, setCgst] = useState(0)
     const [sgst, setSgst] = useState(0)
     const [igst, setIgst] = useState(0)
@@ -42,7 +41,7 @@ function Demo() {
         setitem_amount(value);
     }
     const onFinish = (values) => {
-        const student = { po_number, delivery_date, date,amount,cgst,sgst,igst,tds,descrption }
+        const student = { po_number, delivery_date, date,amount,cgst,sgst,igst,tds,description }
         //console.log(student);
         setIsSubmitted(true);
         fetch(`${MAIN_URL}`, {

@@ -1,12 +1,13 @@
 import { InboxOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
+import { MAIN_URL } from '../../constant';
 // import { PickerOverlay } from 'filestack-react';
 const { Dragger } = Upload;
 
 const props = {
     name: 'file',
     multiple: true,
-    action: 'https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders',
+    action: `${MAIN_URL}`,
 
     onChange(info) {
         const { status } = info.file;

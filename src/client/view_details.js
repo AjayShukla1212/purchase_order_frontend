@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Select, Form } from 'antd';
 import MiniDesc from './components/after_view_details';
+import { MAIN_URL } from '../constant';
 const { Option } = Select;
 
 function ShowDetails() {
     const [report, setreport] = useState([]);
     const [report_id, setreport_id] = useState({});
     const [isSelect, setSelect] = useState(false);
+    
     const setforgetdetails = async () => {
-        await fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders`)
+        await fetch(`${MAIN_URL}`)
             .then(res => console.log(res))
             .then((result) => {
                 console.log(result);
@@ -24,7 +26,7 @@ function ShowDetails() {
         //         setreport(result);
         //     }
         //     )
-        fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders`)
+        fetch(`${MAIN_URL}`)
             .then(res => res.json())
             .then((result) => {
                 console.log(result);
