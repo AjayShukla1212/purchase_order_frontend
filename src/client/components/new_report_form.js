@@ -2,30 +2,28 @@ import React from 'react'
 import { DatePicker } from 'antd';
 import { InputNumber } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import { Select, Form, Input, Button,Upload } from 'antd';
+import { Select, Form, Input, Button, Upload, Modal } from 'antd';
 import { useState } from 'react';
 import './new_report.css';
 import { MAIN_URL } from '../../constant';
- import Upload_page from './main_form';
+import Upload_page from './main_form';
 import ShowDetails from '../view_details';
 const { Option } = Select;
-const {TextArea}=Input;
+const { TextArea } = Input;
 function Demo() {
     debugger;
-    const [po_number, setpo_number] = useState(0)
-    const [company_name, setcompany_name] = useState('')
-    const [po_date, setpo_date] = useState('')
-    const [vendor_name, setvendor_name] = useState('')
-    const [descrption,setDescription] = useState('')
+    const [po_number, setpo_number] = useState(0);
+    const [date, setpo_date] = useState('')
+    const [description, setDescription] = useState('')
     const [payment_terms, setpayment_term] = useState('')
-    const [required_date, setrequired_date] = useState('')
-    const [item_amount, setitem_amount] = useState(0)
-    const [total_amount,setTotal]=useState(0)
+    const [delivery_date, setrequired_date] = useState('')
+    const [amount, setitem_amount] = useState(0)
+    const [total_amount, setTotal] = useState(0)
     const [cgst, setCgst] = useState(0)
     const [sgst, setSgst] = useState(0)
     const [igst, setIgst] = useState(0)
     const [tds, setTds] = useState(0)
-    const [issubmitted, setIsSubmitted] = useState(false);
+    const [issubmitted, setIsSubmitted] = useState(true);
     const handle_po_Date = (date, dateString) => {
         setpo_date(dateString);
 
@@ -34,7 +32,7 @@ function Demo() {
         setrequired_date(dateString);
 
     }
-    
+
     const setpo_number_in = (value) => {
         setpo_number(value);
     }
@@ -43,26 +41,32 @@ function Demo() {
         setitem_amount(value);
     }
     const onFinish = (values) => {
-        const student = { po_number, company_name, po_date, vendor_name, payment_terms, required_date, item_amount }
-        //console.log(student);
+
+        const student = { po_number, delivery_date, date, amount, cgst, sgst, igst, tds, description, total_amount }
+
+        console.log(student);
         setIsSubmitted(true);
-        fetch('http://localhost:8080/report', {
+        fetch('https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(student)
 
         }).then(() => {
-            //setIsSubmitted(true);
             console.log("done");
+            success();
         })
     }
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-
+    const success = () => {
+        Modal.success({
+            content: 'Purchase Order Added Successfully!',
+        });
+    };
     const renderform = (
-        <div className='form' style={{width:'130%'}}>
-        
+        <div className='form' style={{ width: '130%' }}>
+
             <ShowDetails />
             <Form
                 name="basic"
@@ -82,7 +86,7 @@ function Demo() {
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
-                
+
                 <div className='input-container'>
                     <Form.Item
                         label="Purchase Order#"
@@ -94,7 +98,7 @@ function Demo() {
                             },
                         ]}
                     >
-                        <InputNumber placeholder="Enter Company Name"
+                        <InputNumber placeholder="Enter P O Number"
                             onChange={setpo_number_in} />
                     </Form.Item>
                 </div>
@@ -140,7 +144,7 @@ function Demo() {
                             },
                         ]}
                     >
-                        <DatePicker placeholder='enter Required Date'
+                        <DatePicker placeholder='enter Delivery Date'
                             onChange={handleDate} />
                     </Form.Item>
                 </div>
@@ -175,7 +179,7 @@ function Demo() {
                             },
                         ]}
                     >
-                        <InputNumber placeholder='Enter the amount ' value={item_amount}
+                        <InputNumber placeholder='Enter the amount ' value={amount}
                             onChange={setitem_amount_in} />
                     </Form.Item>
                 </div>
@@ -191,7 +195,7 @@ function Demo() {
                         ]}
                     >
                         <InputNumber placeholder='Enter the amount ' value={cgst}
-                            onChange={(e)=>{setCgst(e.target.value)}} />
+                            onChange={(e) => { setCgst(e.target.value) }} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -206,7 +210,7 @@ function Demo() {
                         ]}
                     >
                         <InputNumber placeholder='Enter the amount ' value={sgst}
-                            onChange={(e)=>{setSgst(e.target.value)}} />
+                            onChange={(e) => { setSgst(e.target.value) }} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -221,7 +225,7 @@ function Demo() {
                         ]}
                     >
                         <InputNumber placeholder='Enter the amount ' value={igst}
-                            onChange={(e)=>{setIgst(e.target.value)}} />
+                            onChange={(e) => { setIgst(e.target.value) }} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -235,33 +239,34 @@ function Demo() {
                             },
                         ]}
                     >
-                        <InputNumber placeholder='Enter the amount ' value={tds}
-                            onChange={(e)=>{setTds(e.target.value)}} />
+                        <InputNumber placeholder='Enter the TDS ' value={tds}
+                            onChange={(e) => { setTds(e.target.value) }} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
                     <Form.Item>
-                    <label><strong style={{"padding-right":"2.5em"}}>Total amount</strong></label>
-                        <InputNumber  defaultValue={3}/>
+                        <label><strong style={{ "padding-right": "2.5em" }}>Total amount</strong></label>
+                        <InputNumber defaultValue={3} />
                     </Form.Item>
                 </div>
                 <label>Description</label>
                 <div className='input-container'>
                     <Form.Item
-                        
+
                         name="descption"
-                       
+
                     >
-                        <TextArea placeholder="Add description to purchase order" rows={4} value={descrption}
-                            onChange={(e)=>{setDescription(e.target.value)}} />
+                        <TextArea placeholder="Add description to purchase order" rows={4} value={description}
+                            onChange={(e) => { setDescription(e.target.value) }} />
                     </Form.Item>
+
                 </div>
                 <Upload >
-                <label style={{'padding-bottom':'2em'}}><strong>Upload File(s) related to purchase order</strong></label><br/>
-    <Button icon={<UploadOutlined />}>Upload</Button>
-    <p>Can upload upto 10 files and total 500MB</p>
-  </Upload>
-                
+                    <label style={{ 'padding-bottom': '2em' }}><strong>Upload File(s) related to purchase order</strong></label><br />
+                    <Button icon={<UploadOutlined />}>Upload</Button>
+                    <p>Can upload upto 10 files and total 500MB</p>
+                </Upload>
+
                 <div className='input-container'>
                     <Form.Item
                         name="remember"
@@ -298,11 +303,7 @@ function Demo() {
                     </td>
                     <td>
                         <div className="login-form">
-                            {issubmitted ? <div><h2 >You have added new Purchase Order Successfully!</h2>
-                                <Button className="button-contain" variant="contained" type="primary" shape='round' size='large' onClick={(e) => { e.preventDefault(); window.location.href = '/newreport'; }}>
-                                    + Add New Report
-                                </Button>
-                            </div> : renderform}
+                            {issubmitted ? renderform : <h1></h1>}
                         </div>
                     </td>
                 </tr>

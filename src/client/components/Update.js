@@ -2,14 +2,15 @@ import { DatePicker } from 'antd';
 import { InputNumber } from 'antd';
 import { Alert } from 'antd';
 import { Select, Form, Input, Button, Checkbox } from 'antd';
-import React,{ useState, useEffect } from 'react';
-import { useParams, useNavigate} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
 const { Option } = Select;
 const {TextArea}=Input;
 
 function Update() {
     let navigate = useNavigate();
+
 const {id} = useParams();
 const [invoice, setInvoice] = useState({
     company_name: "",
@@ -41,31 +42,31 @@ const loadInvoice = async () => {
     setInvoice(data);
 };
 
-useEffect(() => {
-    loadInvoice();
-}, []);
+    useEffect(() => {
+        loadInvoice();
+    }, []);
 
 
-  const onFinish = (values) =>
-  {
-    setInvoice({ ...invoice, isSubmitted: true});
-    fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders/${id}`, {
-      method: 'PUT',
-      headers:{
-        // 'Accept':'application/json',
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify(invoice)
-    }).then(() => {
-        return navigate('/')
-    })
-  }
 
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-};
+    const onFinish = (values) => {
+        setInvoice({ ...invoice, isSubmitted: true });
+        fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders/${id}`, {
+            method: 'PUT',
+            headers: {
+                // 'Accept':'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(invoice)
+        }).then(() => {
+            return navigate('/')
+        })
+    }
 
-    
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
+
+
     const renderform = (
         <div className='form'>
             <h1>Update Purchase Order</h1>
@@ -231,7 +232,7 @@ useEffect(() => {
                             },
                         ]}
                     >
-                        <Input name="vendor_name" value={vendor_name} onChange={e => onInputChange(e)}  />
+                        <Input name="vendor_name" value={vendor_name} onChange={e => onInputChange(e)} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -244,7 +245,7 @@ useEffect(() => {
                             },
                         ]}
                     >
-                        <Select name="shipping_method"  value={shipping_method}
+                        <Select name="shipping_method" value={shipping_method}
                             onChange={e => onInputChange(e)}>
                             <Option value='flight'>Flight</Option>
                             <Option value='By Road'>By Road</Option>
@@ -291,7 +292,7 @@ useEffect(() => {
                             },
                         ]}
                     >
-                        <Input name="item_description" value={item_description} onChange={e => onInputChange(e)}/>
+                        <Input name="item_description" value={item_description} onChange={e => onInputChange(e)} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -349,11 +350,11 @@ useEffect(() => {
         <div className="app_category">
             <div className="login-form">
                 {isSubmitted ? <Alert
-      message="Success"
-      description="Purchase Order updated successfully."
-      type="success"
-      showIcon
-    /> : renderform}
+                    message="Success"
+                    description="Purchase Order updated successfully."
+                    type="success"
+                    showIcon
+                /> : renderform}
             </div>
         </div>
     );

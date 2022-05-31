@@ -1,13 +1,14 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Table, Space, Button } from 'antd';
 
-import { useNavigate, Link } from 'react-router-dom';
 
-import axios from 'axios';
+
+import { Link, useNavigate } from 'react-router-dom';
 
 import { MAIN_URL } from '../../constant';
 import ViewPo from './ViewPoNumber';
+
 
 const getId = async(val)=>{
   await fetch(`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders${val}`)
@@ -16,19 +17,8 @@ const getId = async(val)=>{
     console.log(result);
     return <ViewPo report = {result}/>
   })
+
 }
-
-
- const handleClick = (e) => {
-    e.preventDefault();
-    console.log('The link was clicked.');
-  //   await fetch(`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${val}`)
-  // .then(temp =>temp.data.json())
-  // .then(result=>{
-  //   console.log(result);
-  //   return <ViewPo report = {result}/>
-  // })
-  };
 
 const columns = [
   // {
@@ -47,18 +37,20 @@ const columns = [
   //       <a  href={`https://a0f1-183-82-114-140.in.ngrok.io/api/v1/purchaseorders/${record.id}`}>{text}</a>
   //       {/* <Button name="update" type="primary" shape="round" size='large'>Update</Button>
   //       <Button name="delete" type="danger" shape="round" size='large'>Delete</Button> */}
-        
+
 
   //     </Space>
   //   ),
   // },
-  
+
   {
     title: 'PO Number',
-    dataIndex:'po_number',
+    dataIndex: 'po_number',
     key: 'po_number',
-     render: (text,record) => <a onClick={handleClick} href={`https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders/${record.id}`}>{text}</a>
-   },
+
+    render: (text, record) => <Link to={{ pathname: `/view/${record.id}` }}>{text}</Link>
+  },
+
   {
     title: 'Owner Name',
     dataIndex: 'company_name',
@@ -95,28 +87,27 @@ const columns = [
       <Space size="middle">
         {/* <a>Invite {record.name}</a>
         <a>Delete</a> */}
-        <Link to={{pathname: `/update/${record.id}`}}><Button name="update" type="primary" shape="round" size='large'>Update</Button></Link>
+        <Link to={{ pathname: `/update/${record.id}` }}><Button name="update" type="primary" shape="round" size='large'>Update</Button></Link>
         <Button name="delete" type="danger" shape="round" size='large'>Delete</Button>
       </Space>
     ),
   },
 
-  
+
 ];
 
 
 
 const Menu = () => {
-   const [invoice,setInvoice] = useState([]);
-
+  const [invoice, setInvoice] = useState([]);
   
   useEffect(() =>{
     fetch("https://cold-ghosts-shop-183-82-114-140.loca.lt/api/v1/purchaseorders")
       .then(res => res.json())
-      .then((result)=>{
+      .then((result) => {
         setInvoice(result);
       }).then(console.log(invoice))
-  },[])
+  }, [])
 
   useEffect(() => {
 
@@ -132,13 +123,14 @@ const Menu = () => {
         }
       })
 
-             return await res.json();
-        }
-   fetchData().then(res=>{console.log(res)
-    setInvoice(res)
-})
+      return await res.json();
+    }
+    fetchData().then(res => {
+      console.log(res)
+      setInvoice(res)
+    })
 
-   
+
 
     console.log(invoice)
 
@@ -146,7 +138,7 @@ const Menu = () => {
   let navigate = useNavigate();
 
   return (
-    
+
 
 
     <div style={{ padding: "20px" }}>
@@ -158,7 +150,7 @@ const Menu = () => {
         invoice.map(temp => (<h1>{temp.id}</h1>) )
       } */}
     </div>
-    
+
 
 
   )
