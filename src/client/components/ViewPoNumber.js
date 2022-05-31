@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { Menu } from 'antd';
 const ViewPo = () => {
     const [isflag, setisflag] = useState(false);
+    const [isflag1, setisflag1] = useState(false);
+    const [isflag2, setisflag2] = useState(false);
     const { id } = useParams();
     const [Data, setData] = useState({});
     console.log(id);
@@ -15,8 +17,9 @@ const ViewPo = () => {
                 console.log(result.data);
             })
     }, [])
-    const render = (
-        <div>
+    const render_details = (
+
+        < div >
             <table>
                 <tr>
                     <th>Invoice Number# </th>
@@ -59,8 +62,18 @@ const ViewPo = () => {
                     <td>Rs. {Data.tds}</td>
                 </tr>
             </table>
-        </div>
+        </div >
 
+    );
+    const render_history = (
+        <div>
+            <h1>History of this Invoice is..........</h1>
+        </div>
+    );
+    const render_comments = (
+        <div>
+            <h1>Comments.........</h1>
+        </div>
     );
     return (
         <div className='Main-section'>
@@ -76,22 +89,25 @@ const ViewPo = () => {
                         <div>
                             <Menu mode="horizontal" defaultSelectedKeys={['details']}>
                                 <tr>
-                                    <Menu.Item key="details" onClick={() => (setisflag(true))}>
+                                    <Menu.Item key="details" onClick={() => { setisflag(true); setisflag1(false); setisflag2(false); }}>
                                         Details
 
                                     </Menu.Item>
 
                                 </tr>
-                                <Menu.Item key="History">
+                                <Menu.Item key="History" onClick={() => { setisflag(false); setisflag1(true); setisflag2(false); }}>
                                     History
                                 </Menu.Item>
 
-                                <Menu.Item key="Comments">
+                                <Menu.Item key="Comments" onClick={() => { setisflag(false); setisflag1(false); setisflag2(true); }}>
                                     Comments
                                 </Menu.Item>
 
                             </Menu>
-                            {isflag ? render : <h1></h1>}
+                            {isflag ? render_details : <h1></h1>}
+                            {isflag1 ? render_history : <h1></h1>}
+                            {isflag2 ? render_comments : <h1></h1>}
+
                         </div>
                     </td>
                 </tr>
