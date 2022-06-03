@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { DatePicker } from 'antd';
 import { InputNumber } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
@@ -13,51 +13,97 @@ const { Option } = Select;
 const { TextArea } = Input;
 function Demo() {
     debugger;
-    const [po_number, setpo_number] = useState(0);
-    const [date, setpo_date] = useState('')
-    const [description, setDescription] = useState('')
-    const [payment_terms, setpayment_term] = useState('')
-    const [delivery_date, setrequired_date] = useState('')
-    const [amount, setitem_amount] = useState(0)
-    const [cgst, setCgst] = useState(0)
-    const [sgst, setSgst] = useState(0)
-    const [igst, setIgst] = useState(0)
-    const [tds, setTds] = useState(0)
+    // const [po_number, setpo_number] = useState(0);
+    // const [date, setpo_date] = useState('')
+    // const [description, setDescription] = useState('')
+    // const [payment_terms, setpayment_term] = useState('')
+    // const [delivery_date, setrequired_date] = useState('')
+    // const [amount, setitem_amount] = useState(0)
+    // const [cgst, setCgst] = useState(0)
+    // const [sgst, setSgst] = useState(0)
+    // const [igst, setIgst] = useState(0)
+    // const [tds, setTds] = useState(0)
     const [issubmitted, setIsSubmitted] = useState(true);
-    const handle_po_Date = (date, dateString) => {
-        setpo_date(dateString);
 
-    }
-    const handleDate = (date, dateString) => {
-        setrequired_date(dateString);
 
+    const [values,setValues]=useState({
+        po_number:'',
+        description:'',
+        payment_terms:'',
+        date:'',
+        delivery_date:'',
+        amount:0,
+        cgst:0,
+        sgst:0,
+        igst:0,
+        tds:0,
+        po_doc:'',
+        additional_docs:[],
+        form_data:''
+    })
+
+const {po_number,description,payment_terms,date,delivery_date,amount,cgst,sgst,igst,tds,po_doc,additional_docs,form_data}=values;
+const preload=()=>{
+setValues({...values,form_data:new FormData()})
+}
+
+const handleChange=(name,event)=>{
+   
+    let value;
+    if(event.target){
+         value=event.target.value;
+    }else{
+        value=name === "additional_docs" ? event.fileList :event;
     }
 
-    const setpo_number_in = (value) => {
-        setpo_number(value);
-    }
+setValues({...values,[name]:value})
+// console.log(value)
+console.log(additional_docs)
+}
 
-    const setitem_amount_in = (value) => {
-        setitem_amount(value);
+
+//TODO:Have to set file size limitation process
+const beforeUpload=(file)=>{
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+
+    if (!isJpgOrPng) {
+        onFinishFailed('You can only upload JPG/PNG file!');
     }
+  
+    const isLt2M = file.size / 1024 / 1024 < 5;
+  
+    if (!isLt2M) {
+        onFinishFailed('Image must smaller than 2MB!');
+    }
+  
+    return isJpgOrPng && isLt2M;
+}
+
+useEffect(()=>{
+preload()
+
+},[])
     const onFinish = (values) => {
-        const student = { po_number, delivery_date, date,amount,cgst,sgst,igst,tds,description }
+        
         //console.log(student);
         setIsSubmitted(true);
         fetch(`${MAIN_URL}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(student)
+            body: JSON.stringify(values)
 
         }).then(() => {
             //setIsSubmitted(true);
-            console.log(student)
+            console.log(values)
             console.log("done");
             success();
         })
     }
     const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+        Modal.error({
+            title: 'This is an error message',
+            content: errorInfo,
+          });
     };
     const success = () => {
         Modal.success({
@@ -98,8 +144,8 @@ function Demo() {
                             },
                         ]}
                     >
-                        <InputNumber placeholder="Enter P O Number"
-                            onChange={setpo_number_in} />
+                        <Input placeholder="Enter P O Number" value={po_number}
+                            onChange={(e)=>{handleChange('po_number',e)}} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -115,7 +161,8 @@ function Demo() {
                         ]}
                     >
                         <DatePicker
-                            onChange={handle_po_Date} />
+                        value={date}
+                            onChange={(e)=>{handleChange('date',e)}} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -129,8 +176,8 @@ function Demo() {
                             },
                         ]}
                     >
-                        <DatePicker placeholder='enter Required Date'
-                            onChange={handleDate}
+                        <DatePicker placeholder='enter Required Date' value={delivery_date}
+                            onChange={(e)=>{handleChange('delivery_Date',e)}}
                             disabledDate={(current) => {
               let customDate = moment(date).format("YYYY-MM-DD");
               return (current&&current) < moment(customDate, "YYYY-MM-DD");
@@ -150,7 +197,7 @@ function Demo() {
                         ]}
                     >
                         <Select placeholder='enter payment terms' value={payment_terms}
-                            onChange={setpayment_term}>
+                            onChange={(e)=>{handleChange('payment_terms',e)}}>
                             <Option value='Payment term1'>Payment term1</Option>
                             <Option value='Payment term2'>Payment term2</Option>
                             <Option value='Payment term3'>Payment term3</Option>
@@ -161,7 +208,7 @@ function Demo() {
                 <div className='input-container'>
                     <Form.Item
                         label="Amount"
-                        name="rate"
+                        name="amount"
                         rules={[
                             {
                                 required: true,
@@ -170,7 +217,7 @@ function Demo() {
                         ]}
                     >
                         <InputNumber placeholder='Enter the amount ' value={amount}
-                            onChange={setitem_amount_in} />
+                            onChange={(e)=>{handleChange('amount',e)}} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -185,7 +232,7 @@ function Demo() {
                         ]}
                     >
                         <InputNumber placeholder='Enter the amount ' value={cgst}
-                            onChange={(value)=>{setCgst(value)}} />
+                            onChange={(e)=>{handleChange('cgst',e)}} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -200,7 +247,7 @@ function Demo() {
                         ]}
                     >
                         <InputNumber placeholder='Enter the amount ' value={sgst}
-                            onChange={(value)=>{setSgst(value)}} />
+                            onChange={(e)=>{handleChange('sgst',e)}} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -215,7 +262,7 @@ function Demo() {
                         ]}
                     >
                         <InputNumber placeholder='Enter the amount ' value={igst}
-                            onChange={(value)=>{setIgst(value)}} />
+                            onChange={(e)=>{handleChange('igst',e)}} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -230,7 +277,7 @@ function Demo() {
                         ]}
                     >
                         <InputNumber placeholder='Enter the amount ' value={tds}
-                            onChange={(value)=>{setTds(value)}} />
+                            onChange={(e)=>{handleChange('tds',e)}} />
                     </Form.Item>
                 </div>
                 <div className='input-container'>
@@ -246,13 +293,18 @@ function Demo() {
                         name="descption"
 
                     >
-                        <TextArea placeholder="Add description to purchase order" rows={4} value={descrption}
-                            onChange={(value)=>{setDescription(value)}} />
+                        <TextArea placeholder="Add description to purchase order" rows={4} value={description}
+                            onChange={(e)=>{handleChange('description',e)}} />
                     </Form.Item>
                 </div>
-                <Upload >
+                <Upload value={additional_docs}
+                    onChange={(e)=>{handleChange('additional_docs',e)}}
+                    maxCount={5}
+                    beforeUpload={beforeUpload}
+                    >
                     <label style={{ 'padding-bottom': '2em' }}><strong>Upload File(s) related to purchase order</strong></label><br />
                     <Button icon={<UploadOutlined />}>Upload</Button>
+                    
                     <p>Can upload upto 10 files and total 500MB</p>
                 </Upload>
 
